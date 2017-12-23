@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +59,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E1D707131FEE9CEC00292B7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E1DB3D4C1FEE6D9F009B0648 = {
 			isa = PBXGroup;
 			children = (
 				E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessary */,
 				E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessaryTests */,
 				E1DB3D561FEE6DA0009B0648 /* Products */,
+				E1D707131FEE9CEC00292B7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
