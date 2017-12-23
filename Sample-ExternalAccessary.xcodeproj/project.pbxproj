@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */; };
+		E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalAccessoryMediator.swift; sourceTree = "<group>"; };
 		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				E1DB3D5F1FEE6DA0009B0648 /* Assets.xcassets */,
 				E1DB3D611FEE6DA0009B0648 /* LaunchScreen.storyboard */,
 				E1DB3D641FEE6DA0009B0648 /* Info.plist */,
+				E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */,
 			);
 			path = "Sample-ExternalAccessary";
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */,
+				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
 				E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
