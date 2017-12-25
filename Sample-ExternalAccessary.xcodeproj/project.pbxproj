@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */; };
 		E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */; };
+		E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalAccessoryMediator.swift; sourceTree = "<group>"; };
+		E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryExtension.swift; sourceTree = "<group>"; };
 		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E1D707181FF178CC00292B7B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E1DB3D4C1FEE6D9F009B0648 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessary */ = {
 			isa = PBXGroup;
 			children = (
+				E1D707181FF178CC00292B7B /* Extensions */,
 				E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */,
 				E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */,
 				E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */,
@@ -216,6 +227,7 @@
 			files = (
 				E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */,
 				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
+				E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */,
 				E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
