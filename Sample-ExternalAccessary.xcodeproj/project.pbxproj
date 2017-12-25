@@ -79,6 +79,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		E1D7071B1FF17F2D00292B7B /* EeternalAccessories */ = {
+			isa = PBXGroup;
+			children = (
+				E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */,
+			);
+			path = EeternalAccessories;
+			sourceTree = "<group>";
+		};
 		E1DB3D4C1FEE6D9F009B0648 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +109,7 @@
 		E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessary */ = {
 			isa = PBXGroup;
 			children = (
+				E1D7071B1FF17F2D00292B7B /* EeternalAccessories */,
 				E1D707181FF178CC00292B7B /* Extensions */,
 				E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */,
 				E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */,
@@ -108,7 +117,6 @@
 				E1DB3D5F1FEE6DA0009B0648 /* Assets.xcassets */,
 				E1DB3D611FEE6DA0009B0648 /* LaunchScreen.storyboard */,
 				E1DB3D641FEE6DA0009B0648 /* Info.plist */,
-				E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */,
 			);
 			path = "Sample-ExternalAccessary";
 			sourceTree = "<group>";
