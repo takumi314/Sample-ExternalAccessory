@@ -1,6 +1,6 @@
 //
-//  Sample_ExternalAccessaryTests.swift
-//  Sample-ExternalAccessaryTests
+//  Sample_ExternalAccessoryTests.swift
+//  Sample-ExternalAccessoryTests
 //
 //  Created by NishiokaKohei on 2017/12/23.
 //  Copyright © 2017年 Kohey.Nishioka. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 import ExternalAccessory
-@testable import Sample_ExternalAccessary
+@testable import Sample_ExternalAccessory
 
 class Sample_ExternalAccessaryTests: XCTestCase {
     

@@ -12,7 +12,6 @@
 		E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */; };
 		E1D7071D1FF2958300292B7B /* AccessoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071C1FF2958200292B7B /* AccessoryState.swift */; };
 		E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */; };
-		E1D707211FF2D02000292B7B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D707201FF2D01E00292B7B /* Default-568h@2x.png */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
@@ -37,7 +36,6 @@
 		E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryExtension.swift; sourceTree = "<group>"; };
 		E1D7071C1FF2958200292B7B /* AccessoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryState.swift; sourceTree = "<group>"; };
 		E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryManagerExtension.swift; sourceTree = "<group>"; };
-		E1D707201FF2D01E00292B7B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 		E1DB3D4C1FEE6D9F009B0648 = {
 			isa = PBXGroup;
 			children = (
-				E1D707201FF2D01E00292B7B /* Default-568h@2x.png */,
 				E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessory */,
 				E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessoryTests */,
 				E1DB3D561FEE6DA0009B0648 /* Products */,
@@ -223,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1DB3D631FEE6DA0009B0648 /* LaunchScreen.storyboard in Resources */,
-				E1D707211FF2D02000292B7B /* Default-568h@2x.png in Resources */,
 				E1DB3D601FEE6DA0009B0648 /* Assets.xcassets in Resources */,
 				E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */,
 			);
@@ -403,7 +399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
-				INFOPLIST_FILE = "Sample-ExternalAccessary/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessory/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessory";
@@ -419,7 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
-				INFOPLIST_FILE = "Sample-ExternalAccessary/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessory/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessory";
