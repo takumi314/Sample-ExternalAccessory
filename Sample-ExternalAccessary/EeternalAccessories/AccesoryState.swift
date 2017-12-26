@@ -12,20 +12,20 @@ import ExternalAccessory
 // MARK: - To manage accesory's statement
 
 protocol AccesoryState {
-    typealias ActionHandler = (EAAccessory) -> AccesoryState
+    typealias ActionHandler = (EAAccessing) -> AccesoryState
     func interact(handler: ActionHandler?) -> AccesoryState
-    func connect(manager: EAAccessoryManager, accesory: EAAccessory) -> AccesoryState
-    func disconnect(manager: EAAccessoryManager, accesory: EAAccessory?) -> AccesoryState
+    func connect(manager: EAManagable, accesory: EAAccessing) -> AccesoryState
+    func disconnect(manager: EAManagable, accesory: EAAccessing?) -> AccesoryState
     func stop() -> AccesoryState?
 }
 
 // MARK: - Eextenal Accesory is active
 
 class EAActive: AccesoryState {
-    let manager: EAAccessoryManager
-    let accesory: EAAccessory
+    let manager: EAManagable
+    let accesory: EAAccessing
 
-    init(manager: EAAccessoryManager = .shared(), accesory: EAAccessory) {
+    init(manager: EAManagable = EAAccessoryManager.shared(), accesory: EAAccessing) {
         self.manager    = manager
         self.accesory   = accesory
     }
@@ -35,10 +35,10 @@ class EAActive: AccesoryState {
         }
         return self
     }
-    func connect(manager: EAAccessoryManager = .shared(), accesory: EAAccessory) -> AccesoryState {
+    func connect(manager: EAManagable, accesory: EAAccessing) -> AccesoryState {
         return self
     }
-    func disconnect(manager: EAAccessoryManager, accesory: EAAccessory?) -> AccesoryState {
+    func disconnect(manager: EAManagable, accesory: EAAccessing?) -> AccesoryState {
         return EAInactive(manager: manager, accesory: accesory)
     }
     func stop() -> AccesoryState? {
@@ -49,10 +49,10 @@ class EAActive: AccesoryState {
 // MARK: - Eextenal Accesory is inactive
 
 class EAInactive: AccesoryState {
-    let manager: EAAccessoryManager
-    let accesory: EAAccessory?
+    let manager: EAManagable
+    let accesory: EAAccessing?
 
-    init(manager: EAAccessoryManager = .shared(), accesory: EAAccessory? = nil) {
+    init(manager: EAManagable = EAAccessoryManager.shared(), accesory: EAAccessing? = nil) {
         self.manager    = manager
         self.accesory   = accesory
     }
@@ -63,10 +63,10 @@ class EAInactive: AccesoryState {
         }
         return handler(accesory)
     }
-    func connect(manager: EAAccessoryManager = .shared(),  accesory: EAAccessory) -> AccesoryState {
+    func connect(manager: EAManagable,  accesory: EAAccessing) -> AccesoryState {
         return EAActive(manager: manager, accesory: accesory)
     }
-    func disconnect(manager: EAAccessoryManager = .shared(), accesory: EAAccessory?) -> AccesoryState {
+    func disconnect(manager: EAManagable, accesory: EAAccessing?) -> AccesoryState {
         return self
     }
     func stop() -> AccesoryState? {

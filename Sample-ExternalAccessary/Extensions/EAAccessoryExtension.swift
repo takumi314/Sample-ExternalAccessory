@@ -9,14 +9,30 @@
 import Foundation
 import ExternalAccessory
 
-extension EAAccessory {
+protocol EAAccessing {
+    func readProtocolStrings() -> [String]
+    func accessible(with protocolName: @escaping (String) -> Bool) -> Bool
+    func isConnected() -> Bool
+}
+
+extension EAAccessing {}
+
+extension EAAccessory: EAAccessing {
+
+    func readProtocolStrings() -> [String] {
+        return protocolStrings
+    }
+
+    func isConnected() -> Bool {
+        return isConnected
+    }
 
     ///
     /// @protocolName 外部接続先のプロトコルが含まれるかを判定する関数を指定する.
     /// @return 判定結果がBool型で返される。
     ///
     func accessible(with protocolName: @escaping (String) -> Bool) -> Bool {
-        return protocolStrings.contains(where: protocolName)
+        return readProtocolStrings().contains(where: protocolName)
     }
 
     ///
