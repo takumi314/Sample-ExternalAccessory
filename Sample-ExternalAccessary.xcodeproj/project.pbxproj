@@ -10,6 +10,7 @@
 		E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */; };
 		E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */; };
 		E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */; };
+		E1D7071D1FF2958300292B7B /* AccesoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071C1FF2958200292B7B /* AccesoryState.swift */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 		E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalAccessoryMediator.swift; sourceTree = "<group>"; };
 		E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryExtension.swift; sourceTree = "<group>"; };
+		E1D7071C1FF2958200292B7B /* AccesoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccesoryState.swift; sourceTree = "<group>"; };
 		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */,
+				E1D7071C1FF2958200292B7B /* AccesoryState.swift */,
 			);
 			path = EeternalAccessories;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */,
+				E1D7071D1FF2958300292B7B /* AccesoryState.swift in Sources */,
 				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
 				E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */,
 				E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */,
