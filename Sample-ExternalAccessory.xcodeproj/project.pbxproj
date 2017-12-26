@@ -17,7 +17,7 @@
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
 		E1DB3D601FEE6DA0009B0648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5F1FEE6DA0009B0648 /* Assets.xcassets */; };
 		E1DB3D631FEE6DA0009B0648 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D611FEE6DA0009B0648 /* LaunchScreen.storyboard */; };
-		E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift */; };
+		E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,7 @@
 		E1DB3D621FEE6DA0009B0648 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1DB3D641FEE6DA0009B0648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sample-ExternalAccessoryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample_ExternalAccessaryTests.swift; sourceTree = "<group>"; };
+		E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample_ExternalAccessoryTests.swift; sourceTree = "<group>"; };
 		E1DB3D6F1FEE6DA0009B0648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,7 +130,7 @@
 		E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessoryTests */ = {
 			isa = PBXGroup;
 			children = (
-				E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift */,
+				E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */,
 				E1DB3D6F1FEE6DA0009B0648 /* Info.plist */,
 			);
 			path = "Sample-ExternalAccessoryTests";
@@ -252,7 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift in Sources */,
+				E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
