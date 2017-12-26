@@ -9,21 +9,6 @@
 import Foundation
 import ExternalAccessory
 
-protocol EAManagable {
-    func readConnectedAccessories() -> [EAAccessing]
-    func showAccessoryPicker(withNameFilter predicate: NSPredicate?, completion: EABluetoothAccessoryPickerCompletion?)
-}
-extension EAManagable {
-    func readConnectedAccessories() -> [EAAccessing] {
-        return EAAccessoryManager.shared().connectedAccessories
-    }
-    func showAccessoryPicker(withNameFilter predicate: NSPredicate?, completion: EABluetoothAccessoryPickerCompletion?) {
-        EAAccessoryManager.shared().showBluetoothAccessoryPicker(withNameFilter: predicate, completion: completion)
-    }
-}
-
-extension EAAccessoryManager: EAManagable {}
-
 enum Result<T> {
     case success(T)
     case failure(NSError)
