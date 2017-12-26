@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import ExternalAccessory
 @testable import Sample_ExternalAccessary
 
 class Sample_ExternalAccessaryTests: XCTestCase {
@@ -32,5 +33,22 @@ class Sample_ExternalAccessaryTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
+
+    func testInactiveAccesory() -> Void {
+        let manager = EAAccessoryManager.shared()
+        let mediator = ExternalAccessoryMediator("test", manager: manager, automatic: true)
+
+        XCTAssertTrue(mediator.protocolName == "test")
+
+        let first_state = mediator.connect(name: "")
+
+        XCTAssertTrue(first_state is EAInactive)
+        XCTAssertTrue(mediator.isActive == false)
+        XCTAssertTrue(mediator.isAutomatic == true)
+    }
+
+    func testActiveAccesory() -> Void {
+
+    }
+
 }
