@@ -36,6 +36,7 @@ open class ExternalAccessoryMediator: NSObject {
     let isAutomatic: Bool
     let protocolName: ProtocolName
 
+    var state: AccesoryState
     var isActive: Bool {
         get {
             return state is EAActive
@@ -70,7 +71,7 @@ open class ExternalAccessoryMediator: NSObject {
     ///
     /// プロトコルに適合する外部接続機器の接続状態オブジェクトを返す
     ///
-    func connect(with protocolName: ProtocolName) -> AccesoryState {
+    private func connect(with protocolName: ProtocolName) -> AccesoryState {
         let conditional = { (name: String) -> Bool in
             return name == protocolName
         }
@@ -104,7 +105,7 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     func disconnect() -> Void {
-        self.state = state.disconnect(manager: EAAccessoryManager.shared(), accesory: nil)
+        self.state = state.disconnect(manager: manager, accesory: nil)
     }
 
     // MARK: - Private propeties
@@ -118,7 +119,6 @@ open class ExternalAccessoryMediator: NSObject {
         return manager.readConnectedAccessories()
     }
 
-    private var state: AccesoryState
     private var connectedAccesory: (EAAccessing) -> Bool = { accesory in
         return accesory.isConnected()
     }
