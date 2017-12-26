@@ -34,7 +34,7 @@ class Sample_ExternalAccessaryTests: XCTestCase {
         }
     }
 
-    func testInactiveAccesory() -> Void {
+    func testInactiveaccessory() -> Void {
         let manager = EAAccessoryManager.shared()
         let mediator = ExternalAccessoryMediator("test", manager: manager, automatic: false)
 
@@ -47,7 +47,7 @@ class Sample_ExternalAccessaryTests: XCTestCase {
         XCTAssertTrue(mediator.isAutomatic == false)
     }
 
-    func testActiveAccesory() -> Void {
+    func testActiveaccessory() -> Void {
         class EAAccessoryMock: EAAccessing {
             func readProtocolStrings() -> [String] {
                 return ["test"]
