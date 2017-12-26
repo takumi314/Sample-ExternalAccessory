@@ -25,7 +25,7 @@ class EAActive: AccesoryState {
     let manager: EAAccessoryManager
     let accesory: EAAccessory
 
-    init(manager: EAAccessoryManager, accesory: EAAccessory) {
+    init(manager: EAAccessoryManager = .shared(), accesory: EAAccessory) {
         self.manager    = manager
         self.accesory   = accesory
     }
@@ -52,7 +52,7 @@ class EAInactive: AccesoryState {
     let manager: EAAccessoryManager
     let accesory: EAAccessory?
 
-    init(manager: EAAccessoryManager, accesory: EAAccessory? = nil) {
+    init(manager: EAAccessoryManager = .shared(), accesory: EAAccessory? = nil) {
         self.manager    = manager
         self.accesory   = accesory
     }
@@ -66,7 +66,7 @@ class EAInactive: AccesoryState {
     func connect(manager: EAAccessoryManager = .shared(),  accesory: EAAccessory) -> AccesoryState {
         return EAActive(manager: manager, accesory: accesory)
     }
-    func disconnect(manager: EAAccessoryManager, accesory: EAAccessory?) -> AccesoryState {
+    func disconnect(manager: EAAccessoryManager = .shared(), accesory: EAAccessory?) -> AccesoryState {
         return self
     }
     func stop() -> AccesoryState? {
