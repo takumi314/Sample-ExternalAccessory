@@ -33,13 +33,14 @@ open class ExternalAccessoryMediator: NSObject {
 
     // MARK: - Initializer
 
-    init(_ protocolName: String = "No protocol", manager: EAAccessoryManager = .shared(), automatic: Bool = false) {
+    init(_ protocolName: ProtocolName = "No protocol", manager: EAAccessoryManager = .shared(), automatic: Bool = false) {
         self.protocolName   = protocolName
         self.state          = EAInactive(manager: manager)
         self.isAutomatic    = automatic
     }
 
     // MARK: - Public methods
+
     func execute<T>(with data: T, handler: @escaping (Result<T>) -> Void) -> Void {
         let state = connect(with: .shared(), name: protocolName)
         if state is EAInactive {
@@ -55,9 +56,9 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     ///
-    /// 指定したプロトコルすると, 適合するアクセサリの接続状態を返す
+    /// プロトコルに適合する外部接続機器の接続状態オブジェクトを返す
     ///
-    func connect(with manager: EAAccessoryManager = .shared(),name protocolName: String) -> AccesoryState {
+    func connect(with manager: EAAccessoryManager = .shared(),name protocolName: ProtocolName) -> AccesoryState {
         let conditional = { (name: String) -> Bool in
             return name == protocolName
         }
