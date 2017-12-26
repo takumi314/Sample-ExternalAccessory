@@ -36,19 +36,65 @@ class Sample_ExternalAccessaryTests: XCTestCase {
 
     func testInactiveAccesory() -> Void {
         let manager = EAAccessoryManager.shared()
-        let mediator = ExternalAccessoryMediator("test", manager: manager, automatic: true)
+        let mediator = ExternalAccessoryMediator("test", manager: manager, automatic: false)
 
         XCTAssertTrue(mediator.protocolName == "test")
 
-        let first_state = mediator.connect(name: "")
+        mediator.execute(with: "", handler: { _ in })
 
-        XCTAssertTrue(first_state is EAInactive)
+        XCTAssertTrue(mediator.state is EAInactive)
         XCTAssertTrue(mediator.isActive == false)
-        XCTAssertTrue(mediator.isAutomatic == true)
+        XCTAssertTrue(mediator.isAutomatic == false)
     }
 
     func testActiveAccesory() -> Void {
+        class EAAccessoryMock: EAAccessing {
+            func readProtocolStrings() -> [String] {
+                return ["test"]
+            }
+            func accessible(with protocolName: @escaping (String) -> Bool) -> Bool {
+                return readProtocolStrings().contains(where: protocolName)
+            }
+            func isConnected() -> Bool {
+                return true
+            }
+        }
+        class EAAccessoryManagerMock: EAManagable {
+            func readConnectedAccessories() -> [EAAccessing] {
+                let object = EAAccessoryMock()
+                return [object]
+            }
+        }
 
+
+        let mock = EAAccessoryManagerMock()
+        let mediator = ExternalAccessoryMediator("test", manager: mock, automatic: true)
+
+        XCTAssertTrue(mediator.protocolName == "test")
+
+        mediator.execute(with: "", handler: { _ in  })
+
+        XCTAssertTrue(mediator.state is EAActive)
+        XCTAssertTrue(mediator.isActive == true)
+        XCTAssertTrue(mediator.isAutomatic == true)
+
+        mediator.disconnect()
+        XCTAssertTrue(mediator.state is EAInactive)
+
+        var data: String = ""
+        mediator.execute(with: "test_data", handler: { (result) in
+            switch result {
+            case .success(let string):
+                print(string)
+                data = string
+                break
+            default:
+                break
+            }
+        })
+
+        XCTAssertTrue(mediator.state is EAActive)
+        XCTAssertTrue(data == "test_data")
     }
 
 }
