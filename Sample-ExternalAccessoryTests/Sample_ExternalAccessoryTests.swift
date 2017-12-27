@@ -1,6 +1,6 @@
 //
-//  Sample_ExternalAccessaryTests.swift
-//  Sample-ExternalAccessaryTests
+//  Sample_ExternalAccessoryTests.swift
+//  Sample-ExternalAccessoryTests
 //
 //  Created by NishiokaKohei on 2017/12/23.
 //  Copyright © 2017年 Kohey.Nishioka. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 import ExternalAccessory
-@testable import Sample_ExternalAccessary
+@testable import Sample_ExternalAccessory
 
 class Sample_ExternalAccessaryTests: XCTestCase {
     
@@ -34,7 +34,7 @@ class Sample_ExternalAccessaryTests: XCTestCase {
         }
     }
 
-    func testInactiveAccesory() -> Void {
+    func testInactiveaccessory() -> Void {
         let manager = EAAccessoryManager.shared()
         let mediator = ExternalAccessoryMediator("test", manager: manager, automatic: false)
 
@@ -47,7 +47,7 @@ class Sample_ExternalAccessaryTests: XCTestCase {
         XCTAssertTrue(mediator.isAutomatic == false)
     }
 
-    func testActiveAccesory() -> Void {
+    func testActiveaccessory() -> Void {
         class EAAccessoryMock: EAAccessing {
             func readProtocolStrings() -> [String] {
                 return ["test"]

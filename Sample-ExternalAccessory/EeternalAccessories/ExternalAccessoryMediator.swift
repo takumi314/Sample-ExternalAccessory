@@ -1,6 +1,6 @@
 //
 //  ExternalAccessoryMediator.swift
-//  Sample-ExternalAccessary
+//  Sample-ExternalAccessory
 //
 //  Created by NishiokaKohei on 2017/12/24.
 //  Copyright © 2017年 Kohey.Nishioka. All rights reserved.
@@ -21,7 +21,7 @@ open class ExternalAccessoryMediator: NSObject {
     let isAutomatic: Bool
     let protocolName: ProtocolName
 
-    var state: AccesoryState
+    var state: AccessoryState
     var isActive: Bool {
         get {
             return state is EAActive
@@ -56,7 +56,7 @@ open class ExternalAccessoryMediator: NSObject {
     ///
     /// プロトコルに適合する外部接続機器の接続状態オブジェクトを返す
     ///
-    private func connect(with protocolName: ProtocolName) -> AccesoryState {
+    private func connect(with protocolName: ProtocolName) -> AccessoryState {
         let conditional = { (name: String) -> Bool in
             return name == protocolName
         }
@@ -66,9 +66,9 @@ open class ExternalAccessoryMediator: NSObject {
     ///
     /// 条件設定: 指定したプロトコルが一致すること
     ///
-    private func connect(with name: @escaping (String) -> Bool) -> AccesoryState {
-        let conditional = { (accesory: EAAccessing) -> Bool in
-            return accesory.accessible(with: name)
+    private func connect(with name: @escaping (String) -> Bool) -> AccessoryState {
+        let conditional = { (accessory: EAAccessing) -> Bool in
+            return accessory.accessible(with: name)
         }
         return connect(conditional: conditional)
     }
@@ -76,11 +76,11 @@ open class ExternalAccessoryMediator: NSObject {
     ///
     /// conditional: 一定の条件下で接続先が存在するならば EAActive を生成し, それ以外ならば EAInactive を生成する.
     ///
-    private func connect(conditional: (EAAccessing) -> Bool) -> AccesoryState {
-        guard let accesory = connectedAccessories(manager).filter(conditional).first else {
-            return EAInactive(manager: manager, accesory: nil)
+    private func connect(conditional: (EAAccessing) -> Bool) -> AccessoryState {
+        guard let accessory = connectedAccessories(manager).filter(conditional).first else {
+            return EAInactive(manager: manager, accessory: nil)
         }
-        return EAActive(manager: manager, accesory: accesory)
+        return EAActive(manager: manager, accessory: accessory)
     }
 
     func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {
@@ -90,7 +90,7 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     func disconnect() -> Void {
-        self.state = state.disconnect(manager: manager, accesory: nil)
+        self.state = state.disconnect(manager: manager, accessory: nil)
     }
 
     // MARK: - Private propeties
@@ -104,8 +104,8 @@ open class ExternalAccessoryMediator: NSObject {
         return manager.readConnectedAccessories()
     }
 
-    private var connectedAccesory: (EAAccessing) -> Bool = { accesory in
-        return accesory.isConnected()
+    private var connectedaccessory: (EAAccessing) -> Bool = { accessory in
+        return accessory.isConnected()
     }
 
 }
