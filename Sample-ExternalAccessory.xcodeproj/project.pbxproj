@@ -10,13 +10,14 @@
 		E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */; };
 		E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */; };
 		E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */; };
-		E1D7071D1FF2958300292B7B /* AccesoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071C1FF2958200292B7B /* AccesoryState.swift */; };
+		E1D7071D1FF2958300292B7B /* AccessoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071C1FF2958200292B7B /* AccessoryState.swift */; };
+		E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
 		E1DB3D601FEE6DA0009B0648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5F1FEE6DA0009B0648 /* Assets.xcassets */; };
 		E1DB3D631FEE6DA0009B0648 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D611FEE6DA0009B0648 /* LaunchScreen.storyboard */; };
-		E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift */; };
+		E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,16 +34,17 @@
 		E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalAccessoryMediator.swift; sourceTree = "<group>"; };
 		E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryExtension.swift; sourceTree = "<group>"; };
-		E1D7071C1FF2958200292B7B /* AccesoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccesoryState.swift; sourceTree = "<group>"; };
-		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1D7071C1FF2958200292B7B /* AccessoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryState.swift; sourceTree = "<group>"; };
+		E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryManagerExtension.swift; sourceTree = "<group>"; };
+		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E1DB3D5D1FEE6DA0009B0648 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E1DB3D5F1FEE6DA0009B0648 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1DB3D621FEE6DA0009B0648 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1DB3D641FEE6DA0009B0648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sample-ExternalAccessaryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample_ExternalAccessaryTests.swift; sourceTree = "<group>"; };
+		E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sample-ExternalAccessoryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample_ExternalAccessoryTests.swift; sourceTree = "<group>"; };
 		E1DB3D6F1FEE6DA0009B0648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */,
+				E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -85,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */,
-				E1D7071C1FF2958200292B7B /* AccesoryState.swift */,
+				E1D7071C1FF2958200292B7B /* AccessoryState.swift */,
 			);
 			path = EeternalAccessories;
 			sourceTree = "<group>";
@@ -93,8 +96,8 @@
 		E1DB3D4C1FEE6D9F009B0648 = {
 			isa = PBXGroup;
 			children = (
-				E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessary */,
-				E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessaryTests */,
+				E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessory */,
+				E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessoryTests */,
 				E1DB3D561FEE6DA0009B0648 /* Products */,
 				E1D707131FEE9CEC00292B7B /* Frameworks */,
 			);
@@ -103,13 +106,13 @@
 		E1DB3D561FEE6DA0009B0648 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessary.app */,
-				E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessaryTests.xctest */,
+				E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessory.app */,
+				E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessoryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessary */ = {
+		E1DB3D571FEE6DA0009B0648 /* Sample-ExternalAccessory */ = {
 			isa = PBXGroup;
 			children = (
 				E1D7071B1FF17F2D00292B7B /* EeternalAccessories */,
@@ -121,24 +124,24 @@
 				E1DB3D611FEE6DA0009B0648 /* LaunchScreen.storyboard */,
 				E1DB3D641FEE6DA0009B0648 /* Info.plist */,
 			);
-			path = "Sample-ExternalAccessary";
+			path = "Sample-ExternalAccessory";
 			sourceTree = "<group>";
 		};
-		E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessaryTests */ = {
+		E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessoryTests */ = {
 			isa = PBXGroup;
 			children = (
-				E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift */,
+				E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */,
 				E1DB3D6F1FEE6DA0009B0648 /* Info.plist */,
 			);
-			path = "Sample-ExternalAccessaryTests";
+			path = "Sample-ExternalAccessoryTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E1DB3D541FEE6DA0009B0648 /* Sample-ExternalAccessary */ = {
+		E1DB3D541FEE6DA0009B0648 /* Sample-ExternalAccessory */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1DB3D721FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessary" */;
+			buildConfigurationList = E1DB3D721FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessory" */;
 			buildPhases = (
 				E1DB3D511FEE6DA0009B0648 /* Sources */,
 				E1DB3D521FEE6DA0009B0648 /* Frameworks */,
@@ -148,14 +151,14 @@
 			);
 			dependencies = (
 			);
-			name = "Sample-ExternalAccessary";
+			name = "Sample-ExternalAccessory";
 			productName = "Sample-ExternalAccessary";
-			productReference = E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessary.app */;
+			productReference = E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessory.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E1DB3D681FEE6DA0009B0648 /* Sample-ExternalAccessaryTests */ = {
+		E1DB3D681FEE6DA0009B0648 /* Sample-ExternalAccessoryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1DB3D751FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessaryTests" */;
+			buildConfigurationList = E1DB3D751FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessoryTests" */;
 			buildPhases = (
 				E1DB3D651FEE6DA0009B0648 /* Sources */,
 				E1DB3D661FEE6DA0009B0648 /* Frameworks */,
@@ -166,9 +169,9 @@
 			dependencies = (
 				E1DB3D6B1FEE6DA0009B0648 /* PBXTargetDependency */,
 			);
-			name = "Sample-ExternalAccessaryTests";
+			name = "Sample-ExternalAccessoryTests";
 			productName = "Sample-ExternalAccessaryTests";
-			productReference = E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessaryTests.xctest */;
+			productReference = E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessoryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -192,7 +195,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E1DB3D501FEE6D9F009B0648 /* Build configuration list for PBXProject "Sample-ExternalAccessary" */;
+			buildConfigurationList = E1DB3D501FEE6D9F009B0648 /* Build configuration list for PBXProject "Sample-ExternalAccessory" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -205,8 +208,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E1DB3D541FEE6DA0009B0648 /* Sample-ExternalAccessary */,
-				E1DB3D681FEE6DA0009B0648 /* Sample-ExternalAccessaryTests */,
+				E1DB3D541FEE6DA0009B0648 /* Sample-ExternalAccessory */,
+				E1DB3D681FEE6DA0009B0648 /* Sample-ExternalAccessoryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -237,7 +240,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */,
-				E1D7071D1FF2958300292B7B /* AccesoryState.swift in Sources */,
+				E1D7071D1FF2958300292B7B /* AccessoryState.swift in Sources */,
+				E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */,
 				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
 				E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */,
 				E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */,
@@ -248,7 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessaryTests.swift in Sources */,
+				E1DB3D6E1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +261,7 @@
 /* Begin PBXTargetDependency section */
 		E1DB3D6B1FEE6DA0009B0648 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E1DB3D541FEE6DA0009B0648 /* Sample-ExternalAccessary */;
+			target = E1DB3D541FEE6DA0009B0648 /* Sample-ExternalAccessory */;
 			targetProxy = E1DB3D6A1FEE6DA0009B0648 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -395,10 +399,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
-				INFOPLIST_FILE = "Sample-ExternalAccessary/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessory/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessary";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessory";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -411,10 +415,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
-				INFOPLIST_FILE = "Sample-ExternalAccessary/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessory/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessary";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessory";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -434,7 +438,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sample-ExternalAccessary.app/Sample-ExternalAccessary";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sample-ExternalAccessory.app/Sample-ExternalAccessory";
 			};
 			name = Debug;
 		};
@@ -451,14 +455,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sample-ExternalAccessary.app/Sample-ExternalAccessary";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sample-ExternalAccessory.app/Sample-ExternalAccessory";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E1DB3D501FEE6D9F009B0648 /* Build configuration list for PBXProject "Sample-ExternalAccessary" */ = {
+		E1DB3D501FEE6D9F009B0648 /* Build configuration list for PBXProject "Sample-ExternalAccessory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1DB3D701FEE6DA0009B0648 /* Debug */,
@@ -467,7 +471,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1DB3D721FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessary" */ = {
+		E1DB3D721FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1DB3D731FEE6DA0009B0648 /* Debug */,
@@ -476,7 +480,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1DB3D751FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessaryTests" */ = {
+		E1DB3D751FEE6DA0009B0648 /* Build configuration list for PBXNativeTarget "Sample-ExternalAccessoryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1DB3D761FEE6DA0009B0648 /* Debug */,
