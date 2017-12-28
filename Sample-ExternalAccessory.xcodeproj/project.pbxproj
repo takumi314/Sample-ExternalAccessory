@@ -12,6 +12,7 @@
 		E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */; };
 		E1D7071D1FF2958300292B7B /* AccessoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071C1FF2958200292B7B /* AccessoryState.swift */; };
 		E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */; };
+		E1D707231FF4189A00292B7B /* EASessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707221FF4189A00292B7B /* EASessionExtension.swift */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryExtension.swift; sourceTree = "<group>"; };
 		E1D7071C1FF2958200292B7B /* AccessoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryState.swift; sourceTree = "<group>"; };
 		E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryManagerExtension.swift; sourceTree = "<group>"; };
+		E1D707221FF4189A00292B7B /* EASessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EASessionExtension.swift; sourceTree = "<group>"; };
 		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			children = (
 				E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */,
 				E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */,
+				E1D707221FF4189A00292B7B /* EASessionExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				E1D7071D1FF2958300292B7B /* AccessoryState.swift in Sources */,
 				E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */,
 				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
+				E1D707231FF4189A00292B7B /* EASessionExtension.swift in Sources */,
 				E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */,
 				E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */,
 			);
