@@ -105,7 +105,7 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     private var connectedaccessory: (EAAccessing) -> Bool = { accessory in
-        return accessory.isConnected()
+        return accessory.isConnected
     }
 
 }
