@@ -66,6 +66,26 @@ class ExternalAccessoryDispatcher: NSObject {
         start()
     }
 
+    func send(_ data: Data) {
+        let result = data.withUnsafeBytes {
+            return session.output?.write($0, maxLength: data.count)
+        }
+        guard let code = result else {
+            return
+        }
+        switch code {
+        case (-1):
+            print(session.output?.streamError?.localizedDescription ?? "Error")
+            break
+        case (0):
+            print("Result 0: A fixed-length stream and has reached its capacity.")
+            break
+        default:
+            print("Result: \(code) bytes written")
+            break
+        }
+    }
+
     // MARK: Private properies
 
     private var accessory: EAAccessory {
