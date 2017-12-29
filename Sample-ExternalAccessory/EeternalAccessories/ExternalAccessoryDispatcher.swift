@@ -51,6 +51,8 @@ class ExternalAccessoryDispatcher: NSObject {
         return session.protocolName ?? ""
     }
 
+    var delegate: EADispatcherDelegate?
+
     // MARK: Private properies
 
     private var accessory: EAAccessory {
