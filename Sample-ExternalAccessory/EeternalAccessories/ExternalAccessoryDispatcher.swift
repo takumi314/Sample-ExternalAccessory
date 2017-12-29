@@ -13,7 +13,9 @@ protocol Dispatchable {
 
 }
 
-class ExternalAccessoryDispatcher {
+protocol EADispatcherDelegate {
+    func receivedMessage<T>(message: T)
+}
 
     let session: EASession
 
