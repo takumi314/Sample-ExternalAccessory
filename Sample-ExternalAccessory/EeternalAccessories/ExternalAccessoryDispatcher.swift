@@ -53,6 +53,19 @@ class ExternalAccessoryDispatcher: NSObject {
 
     var delegate: EADispatcherDelegate?
 
+
+    // MARK: - Public methods
+
+    func setupNetworkCommunication() {
+        session.input?.delegate = self
+        session.output?.delegate = self
+
+        session.input?.schedule(in: .current, forMode: .commonModes)
+        session.output?.schedule(in: .current, forMode: .commonModes)
+
+        start()
+    }
+
     // MARK: Private properies
 
     private var accessory: EAAccessory {
@@ -67,6 +80,17 @@ class ExternalAccessoryDispatcher: NSObject {
         return session.output!
     }
 
+    // MARK: - Private methods
+
+    func start() {
+        session.input?.open()
+        session.output?.open()
+    }
+
+    func stop() {
+        session.input?.close()
+        session.output?.close()
+    }
 }
 
 extension ExternalAccessoryDispatcher {
