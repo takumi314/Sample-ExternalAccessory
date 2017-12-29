@@ -9,24 +9,46 @@
 import Foundation
 import ExternalAccessory
 
-protocol Dispatchable {
+protocol EADispatchable {
+    var input: InputStream? { get }
+    var output: OutputStream? { get }
+    var accessory: EAAccessory? { get }
+    var protocolName: ProtocolName? { get }
+}
 
+extension EASession: EADispatchable {
+    var input: InputStream? {
+        return self.inputStream
+    }
+    var output: OutputStream? {
+        return self.outputStream
+    }
+    var accessory: EAAccessory? {
+        return self.accessory
+    }
+    var protocolName: ProtocolName? {
+        return self.protocolString
+    }
 }
 
 protocol EADispatcherDelegate {
     func receivedMessage<T>(message: T)
 }
 
-    let session: EASession
+class ExternalAccessoryDispatcher: NSObject {
 
-    init(_ session: EASession) {
-        self.session = session
+    let session: EADispatchable
+    let state: AccessoryState
+
+    init(_ session: EADispatchable, state: AccessoryState) {
+        self.session    = session
+        self.state      = state
     }
 
     // MARK: - Public properties
 
     var protocolString: String {
-        return session.protocolString ?? ""
+        return session.protocolName ?? ""
     }
 
     // MARK: Private properies
@@ -36,11 +58,11 @@ protocol EADispatcherDelegate {
     }
 
     private var input: InputStream {
-        return session.inputStream!
+        return session.input!
     }
 
     private var output: OutputStream {
-        return session.outputStream!
+        return session.output!
     }
 
 }
