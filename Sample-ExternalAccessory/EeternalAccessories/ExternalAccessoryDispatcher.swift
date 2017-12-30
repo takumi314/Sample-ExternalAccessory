@@ -111,6 +111,26 @@ class ExternalAccessoryDispatcher: NSObject {
         session.input?.close()
         session.output?.close()
     }
+
+    private func stream(_ aStream: Stream, handler eventCode: Stream.Event) {
+        switch eventCode {
+        case Stream.Event.hasBytesAvailable:
+            print("new message received")
+            break
+        case Stream.Event.hasSpaceAvailable:
+            print("has space available")
+            break
+        case Stream.Event.errorOccurred:
+            print("error occurred")
+            break
+        case Stream.Event.endEncountered:
+            print("new message received")
+            break
+        default:
+            print("some other event...")
+            break
+        }
+    }
 }
 
 extension ExternalAccessoryDispatcher {
