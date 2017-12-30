@@ -18,12 +18,12 @@ enum Result<T> {
     case failure(NSError)
 }
 
-typealias ProtocolName = String
+typealias ProtocolString = String
 
 open class ExternalAccessoryMediator: NSObject {
 
     let isAutomatic: Bool
-    let protocolName: ProtocolName
+    let protocolString: ProtocolString
 
     var state: AccessoryState
     var isActive: Bool {
@@ -34,8 +34,8 @@ open class ExternalAccessoryMediator: NSObject {
 
     // MARK: - Initializer
 
-    init(_ protocolName: ProtocolName = TEST_PROTOCOL_NAME, manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
-        self.protocolName   = protocolName
+    init(_ protocolString: ProtocolString = TEST_PROTOCOL_NAME, manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
+        self.protocolString   = protocolString
         self.manager        = manager
         self.state          = EAInactive(manager: manager)
         self.isAutomatic    = automatic
@@ -44,7 +44,7 @@ open class ExternalAccessoryMediator: NSObject {
     // MARK: - Public methods
 
     func execute<T>(with data: T, handler: @escaping (Result<T>) -> Void) -> Void {
-        let state = connect(with: protocolName)
+        let state = connect(with: protocolString)
         if state is EAInactive {
             let error = NSError(domain: "No matching protocol", code: 100, userInfo: nil)
             handler(.failure(error))
@@ -60,9 +60,9 @@ open class ExternalAccessoryMediator: NSObject {
     ///
     /// プロトコルに適合する外部接続機器の接続状態オブジェクトを返す
     ///
-    private func connect(with protocolName: ProtocolName) -> AccessoryState {
+    private func connect(with protocolString: ProtocolString) -> AccessoryState {
         let conditional = { (name: String) -> Bool in
-            return name == protocolName
+            return name == protocolString
         }
         return connect(with: conditional)
     }

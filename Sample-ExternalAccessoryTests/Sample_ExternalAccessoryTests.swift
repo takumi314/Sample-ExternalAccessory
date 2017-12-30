@@ -38,7 +38,7 @@ class Sample_ExternalAccessaryTests: XCTestCase {
         let manager = EAAccessoryManager.shared()
         let mediator = ExternalAccessoryMediator("test", manager: manager, automatic: false)
 
-        XCTAssertTrue(mediator.protocolName == "test")
+        XCTAssertTrue(mediator.protocolString == "test")
 
         mediator.execute(with: "", handler: { _ in })
 
@@ -60,8 +60,8 @@ class Sample_ExternalAccessaryTests: XCTestCase {
                 }
 
             }
-            func accessible(with protocolName: @escaping (String) -> Bool) -> Bool {
-                return readProtocolStrings.contains(where: protocolName)
+            func accessible(with protocolString: @escaping (String) -> Bool) -> Bool {
+                return readProtocolStrings.contains(where: protocolString)
             }
         }
         class EAAccessoryManagerMock: EAManagable {
@@ -77,7 +77,7 @@ class Sample_ExternalAccessaryTests: XCTestCase {
         let mock = EAAccessoryManagerMock()
         let mediator = ExternalAccessoryMediator("test", manager: mock, automatic: true)
 
-        XCTAssertTrue(mediator.protocolName == "test")
+        XCTAssertTrue(mediator.protocolString == "test")
 
         mediator.execute(with: "", handler: { _ in  })
 

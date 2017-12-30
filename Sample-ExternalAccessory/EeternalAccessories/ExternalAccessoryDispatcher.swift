@@ -13,7 +13,7 @@ protocol EADispatchable {
     var input: InputStream? { get }
     var output: OutputStream? { get }
     var accessory: EAAccessory? { get }
-    var protocolName: ProtocolName? { get }
+    var protocolString: ProtocolString? { get }
 }
 
 extension EASession: EADispatchable {
@@ -26,7 +26,7 @@ extension EASession: EADispatchable {
     var accessory: EAAccessory? {
         return self.accessory
     }
-    var protocolName: ProtocolName? {
+    var protocolString: ProtocolString? {
         return self.protocolString
     }
 }
@@ -50,7 +50,7 @@ public class ExternalAccessoryDispatcher: NSObject {
     // MARK: - Public properties
 
     var protocolString: String {
-        return session.protocolName ?? ""
+        return session.protocolString ?? ""
     }
 
     var delegate: EADispatcherDelegate?
