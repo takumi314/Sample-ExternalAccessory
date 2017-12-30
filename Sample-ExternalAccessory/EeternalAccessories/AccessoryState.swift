@@ -14,7 +14,7 @@ import ExternalAccessory
 protocol AccessoryState {
     typealias ActionHandler = (EAAccessing) -> AccessoryState
     func interact(handler: ActionHandler?) -> AccessoryState
-    func connect(manager: EAManagable, accessory: EAAccessing) -> AccessoryState
+    func connect(manager: EAManagable, accessory: EAAccessing, session: EADispatchable) -> AccessoryState
     func disconnect(manager: EAManagable, accessory: EAAccessing?) -> AccessoryState
     func stop() -> AccessoryState?
 }
@@ -24,10 +24,12 @@ protocol AccessoryState {
 class EAActive: AccessoryState {
     let manager: EAManagable
     let accessory: EAAccessing
+    let session: EADispatchable
 
-    init(manager: EAManagable = EAAccessoryManager.shared(), accessory: EAAccessing) {
+    init(manager: EAManagable = EAAccessoryManager.shared(), accessory: EAAccessing, session : EADispatchable) {
         self.manager    = manager
-        self.accessory   = accessory
+        self.accessory  = accessory
+        self.session    = session
     }
     func interact(handler: ActionHandler?) -> AccessoryState {
         if let handler = handler {
@@ -35,7 +37,7 @@ class EAActive: AccessoryState {
         }
         return self
     }
-    func connect(manager: EAManagable, accessory: EAAccessing) -> AccessoryState {
+    func connect(manager: EAManagable, accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
         return self
     }
     func disconnect(manager: EAManagable, accessory: EAAccessing?) -> AccessoryState {
@@ -63,8 +65,8 @@ class EAInactive: AccessoryState {
         }
         return handler(accessory)
     }
-    func connect(manager: EAManagable,  accessory: EAAccessing) -> AccessoryState {
-        return EAActive(manager: manager, accessory: accessory)
+    func connect(manager: EAManagable,  accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
+        return EAActive(manager: manager, accessory: accessory, session: session)
     }
     func disconnect(manager: EAManagable, accessory: EAAccessing?) -> AccessoryState {
         return self
