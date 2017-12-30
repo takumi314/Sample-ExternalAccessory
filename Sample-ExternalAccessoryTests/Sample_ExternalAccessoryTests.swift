@@ -49,20 +49,27 @@ class Sample_ExternalAccessaryTests: XCTestCase {
 
     func testActiveaccessory() -> Void {
         class EAAccessoryMock: EAAccessing {
-            func readProtocolStrings() -> [String] {
-                return ["test"]
+            var isConnected: Bool {
+                get {
+                    return true
+                }
+            }
+            var readProtocolStrings: [String] {
+                get {
+                    return ["test"]
+                }
+
             }
             func accessible(with protocolName: @escaping (String) -> Bool) -> Bool {
-                return readProtocolStrings().contains(where: protocolName)
-            }
-            func isConnected() -> Bool {
-                return true
+                return readProtocolStrings.contains(where: protocolName)
             }
         }
         class EAAccessoryManagerMock: EAManagable {
-            func readConnectedAccessories() -> [EAAccessing] {
-                let object = EAAccessoryMock()
-                return [object]
+            var readConnectedAccessories: [EAAccessing] {
+                get {
+                    let object = EAAccessoryMock()
+                    return [object]
+                }
             }
         }
 

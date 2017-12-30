@@ -9,6 +9,10 @@
 import Foundation
 import ExternalAccessory
 
+let TEST_PROTOCOL_NAME = "test"
+let BUILD_PROTOCOL_NAME = ""
+let RELEASE_PROTOCOL_NAME = ""
+
 enum Result<T> {
     case success(T)
     case failure(NSError)
@@ -30,7 +34,7 @@ open class ExternalAccessoryMediator: NSObject {
 
     // MARK: - Initializer
 
-    init(_ protocolName: ProtocolName = "No protocol", manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
+    init(_ protocolName: ProtocolName = TEST_PROTOCOL_NAME, manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
         self.protocolName   = protocolName
         self.manager        = manager
         self.state          = EAInactive(manager: manager)
@@ -77,10 +81,11 @@ open class ExternalAccessoryMediator: NSObject {
     /// conditional: 一定の条件下で接続先が存在するならば EAActive を生成し, それ以外ならば EAInactive を生成する.
     ///
     private func connect(conditional: (EAAccessing) -> Bool) -> AccessoryState {
-        guard let accessory = connectedAccessories(manager).filter(conditional).first else {
+        guard let accessory = connectedAccessories(manager).filter(conditional).first,
+            let session = EASession(accessory: accessory as! EAAccessory, forProtocol: TEST_PROTOCOL_NAME) else {
             return EAInactive(manager: manager, accessory: nil)
         }
-        return EAActive(manager: manager, accessory: accessory)
+        return EAActive(manager: manager, accessory: accessory, session: session)
     }
 
     func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {
@@ -105,7 +110,7 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     private var connectedaccessory: (EAAccessing) -> Bool = { accessory in
-        return accessory.isConnected()
+        return accessory.isConnected
     }
 
 }

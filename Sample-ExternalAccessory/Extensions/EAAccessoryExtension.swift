@@ -10,21 +10,25 @@ import Foundation
 import ExternalAccessory
 
 protocol EAAccessing {
-    func readProtocolStrings() -> [String]
+    var isConnected: Bool { get }
+    var readProtocolStrings: [String] { get }
     func accessible(with protocolName: @escaping (String) -> Bool) -> Bool
-    func isConnected() -> Bool
 }
 
 extension EAAccessing {}
 
 extension EAAccessory: EAAccessing {
 
-    func readProtocolStrings() -> [String] {
-        return protocolStrings
+    var isConnected: Bool {
+        get {
+            return self.isConnected
+        }
     }
-
-    func isConnected() -> Bool {
-        return isConnected
+    
+    var readProtocolStrings: [String] {
+        get {
+            return protocolStrings
+        }
     }
 
     ///
@@ -32,7 +36,7 @@ extension EAAccessory: EAAccessing {
     /// @return 判定結果がBool型で返される。
     ///
     func accessible(with protocolName: @escaping (String) -> Bool) -> Bool {
-        return readProtocolStrings().contains(where: protocolName)
+        return readProtocolStrings.contains(where: protocolName)
     }
 
     ///
