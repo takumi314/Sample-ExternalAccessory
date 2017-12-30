@@ -9,6 +9,10 @@
 import Foundation
 import ExternalAccessory
 
+let TEST_PROTOCOL_NAME = "test"
+let BUILD_PROTOCOL_NAME = ""
+let RELEASE_PROTOCOL_NAME = ""
+
 enum Result<T> {
     case success(T)
     case failure(NSError)
@@ -30,7 +34,7 @@ open class ExternalAccessoryMediator: NSObject {
 
     // MARK: - Initializer
 
-    init(_ protocolName: ProtocolName = "No protocol", manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
+    init(_ protocolName: ProtocolName = TEST_PROTOCOL_NAME, manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
         self.protocolName   = protocolName
         self.manager        = manager
         self.state          = EAInactive(manager: manager)
