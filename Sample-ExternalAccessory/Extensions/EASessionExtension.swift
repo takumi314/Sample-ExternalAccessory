@@ -12,9 +12,9 @@ import ExternalAccessory
 extension EASession {
 
     ///
-    /// To provide a EASession instance which is with arguments of EAAccessing and ProtocolName.
+    /// To provide a EASession instance which is with arguments of EAAccessing and ProtocolString.
     ///
-    static func create(accessory: EAAccessing, forProtocol protocolString: ProtocolName) -> EASession? {
+    static func create(accessory: EAAccessing, forProtocol protocolString: ProtocolString) -> EASession? {
         guard let accessory = accessory as? EAAccessory else {
             return nil
         }
