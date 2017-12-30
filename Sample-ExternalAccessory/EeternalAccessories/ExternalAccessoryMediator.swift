@@ -81,10 +81,11 @@ open class ExternalAccessoryMediator: NSObject {
     /// conditional: 一定の条件下で接続先が存在するならば EAActive を生成し, それ以外ならば EAInactive を生成する.
     ///
     private func connect(conditional: (EAAccessing) -> Bool) -> AccessoryState {
-        guard let accessory = connectedAccessories(manager).filter(conditional).first else {
+        guard let accessory = connectedAccessories(manager).filter(conditional).first,
+            let session = EASession(accessory: accessory as! EAAccessory, forProtocol: TEST_PROTOCOL_NAME) else {
             return EAInactive(manager: manager, accessory: nil)
         }
-        return EAActive(manager: manager, accessory: accessory)
+        return EAActive(manager: manager, accessory: accessory, session: session)
     }
 
     func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {
