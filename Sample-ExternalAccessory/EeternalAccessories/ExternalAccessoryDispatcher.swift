@@ -118,6 +118,7 @@ extension ExternalAccessoryDispatcher: StreamDelegate {
         switch eventCode {
         case Stream.Event.hasBytesAvailable:
             print("new message received")
+            readAvailableBytes(aStream as! InputStream, capacity: maxReadLength)
             break
         case Stream.Event.hasSpaceAvailable:
             print("has space available")
@@ -127,11 +128,41 @@ extension ExternalAccessoryDispatcher: StreamDelegate {
             break
         case Stream.Event.endEncountered:
             print("new message received")
+            stop()
             break
         default:
             print("some other event...")
             break
         }
     }
+
+    private func readAvailableBytes(_ stream: InputStream, capacity length: Int) {
+        // set up a buffer, into which you can read the incoming bytes
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
+
+        //  loop for as long as the input stream has bytes to be read
+        while stream.hasBytesAvailable {
+            // read bytes from the stream and put them into the buffer you pass in
+            let numberOfByteRead = stream.read(buffer, maxLength: length)
+            // error occured or not
+            if numberOfByteRead < 0 {
+                let e = stream.streamError
+                print(e?.localizedDescription ?? "Error occured")
+                break
+            }
+            // notify interested parties
+            if let messageString = processedMessageString(buffer, length: numberOfByteRead) {
+                delegate?.receivedMessage(message: messageString)
+            }
+        }
+    }
+
+    private func processedMessageString(_ buffer: UnsafeMutablePointer<UInt8>, length: Int) -> String? {
+        guard let string = String(bytesNoCopy: buffer, length: length, encoding: .ascii, freeWhenDone: true) else {
+            return nil
+        }
+        return string
+    }
+
 }
 
