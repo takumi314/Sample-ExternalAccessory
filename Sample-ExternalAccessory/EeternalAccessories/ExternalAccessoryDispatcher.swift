@@ -104,12 +104,12 @@ public class ExternalAccessoryDispatcher: NSObject {
 
     // MARK: - Private methods
 
-    func start() {
+    private func start() {
         session.input?.open()
         session.output?.open()
     }
 
-    func stop() {
+    private func stop() {
         session.input?.close()
         session.output?.close()
     }
@@ -138,6 +138,8 @@ extension ExternalAccessoryDispatcher: StreamDelegate {
             break
         }
     }
+
+    // MARK: - Private methods
 
     private func readAvailableBytes(_ stream: InputStream, capacity length: Int) {
         // set up a buffer, into which you can read the incoming bytes
