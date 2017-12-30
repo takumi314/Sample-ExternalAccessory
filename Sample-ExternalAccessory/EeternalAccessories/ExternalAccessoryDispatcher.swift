@@ -39,10 +39,12 @@ class ExternalAccessoryDispatcher: NSObject {
 
     let session: EADispatchable
     let state: AccessoryState
+    let maxReadLength: Int
 
-    init(_ session: EADispatchable, state: AccessoryState) {
-        self.session    = session
-        self.state      = state
+    init(_ session: EADispatchable, state: AccessoryState, maxLength maxReadLength: Int = 4096) {
+        self.session        = session
+        self.state          = state
+        self.maxReadLength  = maxReadLength
     }
 
     // MARK: - Public properties
