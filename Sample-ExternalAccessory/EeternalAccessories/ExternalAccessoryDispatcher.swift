@@ -35,7 +35,7 @@ protocol EADispatcherDelegate {
     func receivedMessage<T>(message: T)
 }
 
-class ExternalAccessoryDispatcher: NSObject {
+public class ExternalAccessoryDispatcher: NSObject {
 
     let session: EADispatchable
     let state: AccessoryState
@@ -114,9 +114,10 @@ class ExternalAccessoryDispatcher: NSObject {
         session.output?.close()
     }
 
+}
 
 extension ExternalAccessoryDispatcher: StreamDelegate {
-    func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+    public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.hasBytesAvailable:
             print("new message received")
