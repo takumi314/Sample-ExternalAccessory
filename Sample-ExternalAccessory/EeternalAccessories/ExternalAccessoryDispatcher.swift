@@ -112,7 +112,9 @@ class ExternalAccessoryDispatcher: NSObject {
         session.output?.close()
     }
 
-    private func stream(_ aStream: Stream, handler eventCode: Stream.Event) {
+
+extension ExternalAccessoryDispatcher: StreamDelegate {
+    func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.hasBytesAvailable:
             print("new message received")
@@ -133,6 +135,3 @@ class ExternalAccessoryDispatcher: NSObject {
     }
 }
 
-extension ExternalAccessoryDispatcher {
-
-}
