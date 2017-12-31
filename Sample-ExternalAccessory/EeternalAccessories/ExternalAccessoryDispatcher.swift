@@ -47,6 +47,10 @@ public class ExternalAccessoryDispatcher: NSObject {
         self.maxReadLength  = maxReadLength
     }
 
+    deinit {
+        stop()
+    }
+
     // MARK: - Public properties
 
     var protocolString: String {
@@ -112,6 +116,9 @@ public class ExternalAccessoryDispatcher: NSObject {
     private func stop() {
         session.input?.close()
         session.output?.close()
+
+        session.input?.remove(from: .current, forMode: .commonModes)
+        session.output?.remove(from: .current, forMode: .commonModes)
     }
 
 }
