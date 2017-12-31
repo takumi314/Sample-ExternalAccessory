@@ -14,6 +14,7 @@
 		E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */; };
 		E1D707231FF4189A00292B7B /* EASessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707221FF4189A00292B7B /* EASessionExtension.swift */; };
 		E1D707251FF6299A00292B7B /* ExternalAccessoryDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707241FF6299900292B7B /* ExternalAccessoryDispatcher.swift */; };
+		E1D707291FF9268B00292B7B /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1D707271FF9268B00292B7B /* Connection.cpp */; };
 		E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */; };
 		E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */; };
 		E1DB3D5E1FEE6DA0009B0648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DB3D5C1FEE6DA0009B0648 /* Main.storyboard */; };
@@ -40,6 +41,9 @@
 		E1D7071E1FF2CD6E00292B7B /* EAAccessoryManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryManagerExtension.swift; sourceTree = "<group>"; };
 		E1D707221FF4189A00292B7B /* EASessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EASessionExtension.swift; sourceTree = "<group>"; };
 		E1D707241FF6299900292B7B /* ExternalAccessoryDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalAccessoryDispatcher.swift; sourceTree = "<group>"; };
+		E1D707261FF9268800292B7B /* Sample-ExternalAccessory-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sample-ExternalAccessory-Bridging-Header.h"; sourceTree = "<group>"; };
+		E1D707271FF9268B00292B7B /* Connection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Connection.cpp; sourceTree = "<group>"; };
+		E1D707281FF9268B00292B7B /* Connection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Connection.hpp; sourceTree = "<group>"; };
 		E1DB3D551FEE6DA0009B0648 /* Sample-ExternalAccessory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-ExternalAccessory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D581FEE6DA0009B0648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1DB3D5A1FEE6DA0009B0648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +133,9 @@
 				E1DB3D5F1FEE6DA0009B0648 /* Assets.xcassets */,
 				E1DB3D611FEE6DA0009B0648 /* LaunchScreen.storyboard */,
 				E1DB3D641FEE6DA0009B0648 /* Info.plist */,
+				E1D707271FF9268B00292B7B /* Connection.cpp */,
+				E1D707281FF9268B00292B7B /* Connection.hpp */,
+				E1D707261FF9268800292B7B /* Sample-ExternalAccessory-Bridging-Header.h */,
 			);
 			path = "Sample-ExternalAccessory";
 			sourceTree = "<group>";
@@ -192,6 +199,7 @@
 				TargetAttributes = {
 					E1DB3D541FEE6DA0009B0648 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					E1DB3D681FEE6DA0009B0648 = {
@@ -251,6 +259,7 @@
 				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
 				E1D707231FF4189A00292B7B /* EASessionExtension.swift in Sources */,
 				E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */,
+				E1D707291FF9268B00292B7B /* Connection.cpp in Sources */,
 				E1D707251FF6299A00292B7B /* ExternalAccessoryDispatcher.swift in Sources */,
 				E1DB3D591FEE6DA0009B0648 /* AppDelegate.swift in Sources */,
 			);
@@ -405,6 +414,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessory/Info.plist";
@@ -412,6 +422,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessory";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sample-ExternalAccessory/Sample-ExternalAccessory-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -421,6 +433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessory/Info.plist";
@@ -428,6 +441,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessory";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sample-ExternalAccessory/Sample-ExternalAccessory-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
