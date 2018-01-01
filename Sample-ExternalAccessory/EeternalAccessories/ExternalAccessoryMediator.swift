@@ -99,7 +99,7 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     func disconnect() -> Void {
-        self.state = state.disconnect(manager: manager, accessory: nil)
+        self.state = state.disconnect()
     }
 
     // MARK: - Private propeties

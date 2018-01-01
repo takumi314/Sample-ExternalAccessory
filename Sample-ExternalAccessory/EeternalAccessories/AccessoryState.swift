@@ -15,7 +15,7 @@ protocol AccessoryState {
     typealias ActionHandler = (EAAccessing) -> AccessoryState
     func interact(handler: ActionHandler?) -> AccessoryState
     func connect(manager: EAManagable, accessory: EAAccessing, session: EADispatchable) -> AccessoryState
-    func disconnect(manager: EAManagable, accessory: EAAccessing?) -> AccessoryState
+    func disconnect() -> AccessoryState
     func stop() -> AccessoryState?
 }
 
@@ -40,7 +40,7 @@ class EAActive: AccessoryState {
     func connect(manager: EAManagable, accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
         return self
     }
-    func disconnect(manager: EAManagable, accessory: EAAccessing?) -> AccessoryState {
+    func disconnect() -> AccessoryState {
         return EAInactive(manager: manager, accessory: accessory)
     }
     func stop() -> AccessoryState? {
@@ -68,7 +68,7 @@ class EAInactive: AccessoryState {
     func connect(manager: EAManagable,  accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
         return EAActive(manager: manager, accessory: accessory, session: session)
     }
-    func disconnect(manager: EAManagable, accessory: EAAccessing?) -> AccessoryState {
+    func disconnect() -> AccessoryState {
         return self
     }
     func stop() -> AccessoryState? {
