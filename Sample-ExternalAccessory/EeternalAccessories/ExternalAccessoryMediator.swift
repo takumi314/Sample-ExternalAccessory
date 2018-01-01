@@ -106,7 +106,7 @@ open class ExternalAccessoryMediator: NSObject {
     /// 接続中の外部接続先を返します  () -> [EAAccessory]
     ///
     private let connectedAccessories = { (manager: EAManagable) -> [EAAccessing] in
-        return manager.readConnectedAccessories()
+        return manager.readConnectedAccessories
     }
 
     private var connectedaccessory: (EAAccessing) -> Bool = { accessory in

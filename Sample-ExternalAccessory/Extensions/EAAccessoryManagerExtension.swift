@@ -10,13 +10,15 @@ import Foundation
 import ExternalAccessory
 
 protocol EAManagable {
-    func readConnectedAccessories() -> [EAAccessing]
+    var readConnectedAccessories: [EAAccessing] { get }
     func showAccessoryPicker(withNameFilter predicate: NSPredicate?, completion: EABluetoothAccessoryPickerCompletion?)
 }
 
 extension EAManagable {
-    func readConnectedAccessories() -> [EAAccessing] {
-        return EAAccessoryManager.shared().connectedAccessories
+    var readConnectedAccessories: [EAAccessing] {
+        get {
+            return EAAccessoryManager.shared().connectedAccessories
+        }
     }
     func showAccessoryPicker(withNameFilter predicate: NSPredicate?, completion: EABluetoothAccessoryPickerCompletion?) {
         EAAccessoryManager.shared().showBluetoothAccessoryPicker(withNameFilter: predicate, completion: completion)
