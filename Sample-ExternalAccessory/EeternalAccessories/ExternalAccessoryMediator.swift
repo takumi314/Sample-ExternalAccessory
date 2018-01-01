@@ -41,6 +41,10 @@ open class ExternalAccessoryMediator: NSObject {
         self.isAutomatic    = automatic
     }
 
+    convenience init(_ protocolString: ProtocolString, automatic: Bool) {
+        self.init(protocolString, manager: EAAccessoryManager.shared(), automatic: automatic)
+    }
+
     // MARK: - Public methods
 
     func execute<T>(with data: T, handler: @escaping (Result<T>) -> Void) -> Void {
