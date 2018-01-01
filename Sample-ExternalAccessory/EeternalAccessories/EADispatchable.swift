@@ -7,3 +7,26 @@
 //
 
 import Foundation
+import ExternalAccessory
+
+protocol EADispatchable {
+    var input: InputStream? { get }
+    var output: OutputStream? { get }
+    var accessory: EAAccessory? { get }
+    var protocolString: ProtocolString? { get }
+}
+
+extension EASession: EADispatchable {
+    var input: InputStream? {
+        return self.inputStream
+    }
+    var output: OutputStream? {
+        return self.outputStream
+    }
+    var accessory: EAAccessory? {
+        return self.accessory
+    }
+    var protocolString: ProtocolString? {
+        return self.protocolString
+    }
+}
