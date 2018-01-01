@@ -14,7 +14,7 @@ import ExternalAccessory
 protocol AccessoryState {
     typealias ActionHandler = (EAAccessing) -> AccessoryState
     func interact(handler: ActionHandler?) -> AccessoryState
-    func connect(manager: EAManagable, accessory: EAAccessing, session: EADispatchable) -> AccessoryState
+    func connect(accessory: EAAccessing, session: EADispatchable) -> AccessoryState
     func disconnect() -> AccessoryState
     func stop() -> AccessoryState?
 }
@@ -22,12 +22,10 @@ protocol AccessoryState {
 // MARK: - Eextenal accessory is active
 
 class EAActive: AccessoryState {
-    let manager: EAManagable
     let accessory: EAAccessing
     let session: EADispatchable
 
-    init(manager: EAManagable = EAAccessoryManager.shared(), accessory: EAAccessing, session : EADispatchable) {
-        self.manager    = manager
+    init(accessory: EAAccessing, session : EADispatchable) {
         self.accessory  = accessory
         self.session    = session
     }
@@ -37,11 +35,11 @@ class EAActive: AccessoryState {
         }
         return self
     }
-    func connect(manager: EAManagable, accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
+    func connect(accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
         return self
     }
     func disconnect() -> AccessoryState {
-        return EAInactive(manager: manager, accessory: accessory)
+        return EAInactive(accessory: accessory)
     }
     func stop() -> AccessoryState? {
         return nil
@@ -51,11 +49,9 @@ class EAActive: AccessoryState {
 // MARK: - Eextenal accessory is inactive
 
 class EAInactive: AccessoryState {
-    let manager: EAManagable
     let accessory: EAAccessing?
 
-    init(manager: EAManagable = EAAccessoryManager.shared(), accessory: EAAccessing? = nil) {
-        self.manager    = manager
+    init(accessory: EAAccessing? = nil) {
         self.accessory   = accessory
     }
     func interact(handler: ActionHandler?) -> AccessoryState {
@@ -65,8 +61,8 @@ class EAInactive: AccessoryState {
         }
         return handler(accessory)
     }
-    func connect(manager: EAManagable,  accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
-        return EAActive(manager: manager, accessory: accessory, session: session)
+    func connect(accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
+        return EAActive(accessory: accessory, session: session)
     }
     func disconnect() -> AccessoryState {
         return self

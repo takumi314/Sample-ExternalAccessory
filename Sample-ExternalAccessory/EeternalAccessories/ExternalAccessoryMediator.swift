@@ -37,7 +37,7 @@ open class ExternalAccessoryMediator: NSObject {
     init(_ protocolString: ProtocolString = TEST_PROTOCOL_NAME, manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
         self.protocolString   = protocolString
         self.manager        = manager
-        self.state          = EAInactive(manager: manager)
+        self.state          = EAInactive(accessory: nil)
         self.isAutomatic    = automatic
     }
 
@@ -87,9 +87,9 @@ open class ExternalAccessoryMediator: NSObject {
     private func connect(conditional: (EAAccessing) -> Bool) -> AccessoryState {
         guard let accessory = connectedAccessories(manager).filter(conditional).first,
             let session = EASession(accessory: accessory as! EAAccessory, forProtocol: TEST_PROTOCOL_NAME) else {
-            return EAInactive(manager: manager, accessory: nil)
+            return EAInactive(accessory: nil)
         }
-        return EAActive(manager: manager, accessory: accessory, session: session)
+        return EAActive(accessory: accessory, session: session)
     }
 
     func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {
