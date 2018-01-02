@@ -40,7 +40,7 @@ public class ExternalAccessoryDispatcher: NSObject {
 
     // MARK: - Public methods
 
-    func setupNetworkCommunication() {
+    func connect() {
         session.input?.delegate = self
         session.output?.delegate = self
 
