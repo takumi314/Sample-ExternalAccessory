@@ -51,10 +51,7 @@ public class ExternalAccessoryDispatcher: NSObject {
     }
 
     func send(_ data: Data) {
-        let result = data.withUnsafeBytes {
-            return session.output?.write($0, maxLength: data.count)
-        }
-        guard let code = result else {
+        guard let code = write(data, maxLength: data.count, on: session) else {
             return
         }
         switch code {
@@ -97,6 +94,12 @@ public class ExternalAccessoryDispatcher: NSObject {
 
         session.input?.remove(from: .current, forMode: .commonModes)
         session.output?.remove(from: .current, forMode: .commonModes)
+    }
+
+    private func write(_ data: Data, maxLength length: Int, on session: EADispatchable) -> Int? {
+        return data.withUnsafeBytes {
+            return session.output?.write($0, maxLength: length)
+        }
     }
 
 }
