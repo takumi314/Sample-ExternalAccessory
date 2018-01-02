@@ -16,12 +16,10 @@ protocol EADispatcherDelegate {
 public class ExternalAccessoryDispatcher: NSObject {
 
     let session: EADispatchable
-    let state: AccessoryState
     let maxReadLength: Int
 
-    init(_ session: EADispatchable, state: AccessoryState, maxLength maxReadLength: Int = 4096) {
+    init(_ session: EADispatchable, maxLength maxReadLength: Int = MAX_READ_LENGTH) {
         self.session        = session
-        self.state          = state
         self.maxReadLength  = maxReadLength
     }
 
