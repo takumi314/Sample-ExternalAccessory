@@ -7,7 +7,42 @@
 //
 
 import Foundation
+import ExternalAccessory
 
 struct AccessoryInfo {
-    
+    private let accessory: EAAccessing
+    private let protocolString: ProtocolString
+
+    init(accessory: EAAccessing, protocolString: ProtocolString) {
+        self.accessory      = accessory
+        self.protocolString = protocolString
+    }
+
+    var name: String {
+        get {
+            return accessory.name
+        }
+    }
+
+    var connectedAccessory: EAAccessing? {
+        get {
+            return session?.accessory
+        }
+    }
+
+    var session: EADispatchable? {
+        get {
+            guard let accessory = accessory as? EAAccessory else {
+                return nil
+            }
+            return EASession(accessory: accessory, forProtocol: protocolString)
+        }
+    }
+
+    var isValid: Bool {
+        get {
+            return accessory.accessible(with: { $0 == self.protocolString })
+        }
+    }
+
 }
