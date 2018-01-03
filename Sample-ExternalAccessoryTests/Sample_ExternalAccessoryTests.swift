@@ -49,6 +49,12 @@ class Sample_ExternalAccessaryTests: XCTestCase {
 
     func testActiveaccessory() -> Void {
         class EAAccessoryMock: EAAccessing {
+            var name: String {
+                get {
+                    return "Test"
+                }
+            }
+
             var isConnected: Bool {
                 get {
                     return true

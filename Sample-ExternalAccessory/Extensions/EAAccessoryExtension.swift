@@ -10,6 +10,7 @@ import Foundation
 import ExternalAccessory
 
 protocol EAAccessing {
+    var name: String { get }
     var isConnected: Bool { get }
     var readProtocolStrings: [String] { get }
     func accessible(with protocolString: @escaping (String) -> Bool) -> Bool
@@ -18,6 +19,13 @@ protocol EAAccessing {
 extension EAAccessing {}
 
 extension EAAccessory: EAAccessing {
+
+    var name: String {
+        get {
+            return self.name
+        }
+    }
+
 
     var isConnected: Bool {
         get {
