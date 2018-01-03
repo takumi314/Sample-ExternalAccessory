@@ -93,6 +93,7 @@ open class ExternalAccessoryMediator: NSObject {
         }
         let session = EASession(accessory: accessory as! EAAccessory, forProtocol: protocolString)
         let dispatcher = ExternalAccessoryDispatcher(session!, maxLength: MAX_READ_LENGTH)
+        dispatcher.delegate = self
         return EAActive(accessory: accessory, dispatcher: dispatcher)
     }
 
@@ -129,5 +130,9 @@ extension ExternalAccessoryMediator: EAAccessoryDelegate {
     }
 }
 
-
+extension ExternalAccessoryMediator: EADispatcherDelegate {
+    func receivedMessage<T>(message: T) {
+        //
+    }
+}
 
