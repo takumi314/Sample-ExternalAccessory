@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E115E09D1FFA0F5400B6BDE3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E115E09C1FFA0F5400B6BDE3 /* Info.plist */; };
 		E115E0A01FFA211A00B6BDE3 /* EADispatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115E09F1FFA211A00B6BDE3 /* EADispatchable.swift */; };
+		E115E0A21FFD457000B6BDE3 /* AccessoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115E0A11FFD457000B6BDE3 /* AccessoryInfo.swift */; };
 		E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */; };
 		E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */; };
 		E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		E115E09C1FFA0F5400B6BDE3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E115E09F1FFA211A00B6BDE3 /* EADispatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EADispatchable.swift; sourceTree = "<group>"; };
+		E115E0A11FFD457000B6BDE3 /* AccessoryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryInfo.swift; sourceTree = "<group>"; };
 		E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalAccessoryMediator.swift; sourceTree = "<group>"; };
 		E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryExtension.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				E1D7071C1FF2958200292B7B /* AccessoryState.swift */,
 				E1D707241FF6299900292B7B /* ExternalAccessoryDispatcher.swift */,
 				E115E09F1FFA211A00B6BDE3 /* EADispatchable.swift */,
+				E115E0A11FFD457000B6BDE3 /* AccessoryInfo.swift */,
 			);
 			path = EeternalAccessories;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			files = (
 				E115E0A01FFA211A00B6BDE3 /* EADispatchable.swift in Sources */,
 				E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */,
+				E115E0A21FFD457000B6BDE3 /* AccessoryInfo.swift in Sources */,
 				E1D7071D1FF2958300292B7B /* AccessoryState.swift in Sources */,
 				E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */,
 				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
