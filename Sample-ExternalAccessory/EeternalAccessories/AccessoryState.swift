@@ -23,11 +23,11 @@ protocol AccessoryState {
 
 class EAActive: AccessoryState {
     let accessory: EAAccessing
-    let session: EADispatchable
+    let dispatcher: ExternalAccessoryDispatcher
 
-    init(accessory: EAAccessing, session : EADispatchable) {
+    init(accessory: EAAccessing, dispatcher: ExternalAccessoryDispatcher) {
         self.accessory  = accessory
-        self.session    = session
+        self.dispatcher = dispatcher
     }
     func interact(handler: ActionHandler?) -> AccessoryState {
         if let handler = handler {
@@ -62,7 +62,8 @@ class EAInactive: AccessoryState {
         return handler(accessory)
     }
     func connect(accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
-        return EAActive(accessory: accessory, session: session)
+        return EAActive(accessory: accessory,
+                        dispatcher: ExternalAccessoryDispatcher(session, maxLength: MAX_READ_LENGTH))
     }
     func disconnect() -> AccessoryState {
         return self
