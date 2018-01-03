@@ -48,6 +48,10 @@ public class ExternalAccessoryDispatcher: NSObject {
         start()
     }
 
+    func close() {
+        stop()
+    }
+
     func send(_ data: Data) {
         guard let code = write(data, maxLength: data.count, on: session) else {
             return
