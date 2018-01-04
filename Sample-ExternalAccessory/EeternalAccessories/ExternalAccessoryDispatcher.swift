@@ -21,10 +21,10 @@ protocol EADispatcherDelegate {
 
 public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching {
 
-    let session: EADispatchable?
+    let session: EADispatchable
     let maxReadLength: Int
 
-    init(_ session: EADispatchable?, maxLength maxReadLength: Int = MAX_READ_LENGTH, toDelegate delegate: EADispatcherDelegate?) {
+    init(_ session: EADispatchable, maxLength maxReadLength: Int = MAX_READ_LENGTH, reciever delegate: EADispatcherDelegate?) {
         self.session        = session
         self.maxReadLength  = maxReadLength
         self.delegate       = delegate
@@ -37,8 +37,16 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
     // MARK: - Public properties
 
     var protocolString: String {
-        return session?.protocolString ?? ""
+        return session.protocolString ?? ""
     }
+
+    var info: AccessoryInfo? {
+        guard let accessory = accessory else {
+            return nil
+        }
+        return AccessoryInfo(accessory: accessory, protocolString: protocolString)
+    }
+
 
     var delegate: EADispatcherDelegate?
 
@@ -46,11 +54,11 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
     // MARK: - Public methods
 
     func connect() {
-        session?.input?.delegate = self
-        session?.output?.delegate = self
+        session.input?.delegate = self
+        session.output?.delegate = self
 
-        session?.input?.schedule(in: .current, forMode: .commonModes)
-        session?.output?.schedule(in: .current, forMode: .commonModes)
+        session.input?.schedule(in: .current, forMode: .commonModes)
+        session.output?.schedule(in: .current, forMode: .commonModes)
 
         start()
     }
@@ -65,7 +73,7 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
         }
         switch code {
         case (-1):
-            print(session?.output?.streamError?.localizedDescription ?? "Error")
+            print(session.output?.streamError?.localizedDescription ?? "Error")
             break
         case (0):
             print("Result 0: A fixed-length stream and has reached its capacity.")
@@ -78,31 +86,31 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
 
     // MARK: Private properies
 
-    private var accessory: EAAccessory? {
-        return session?.accessory
+    private var accessory: EAAccessing? {
+        return session.accessory
     }
 
     private var input: InputStream? {
-        return session?.input
+        return session.input
     }
 
     private var output: OutputStream? {
-        return session?.output
+        return session.output
     }
 
     // MARK: - Private methods
 
     private func start() {
-        session?.input?.open()
-        session?.output?.open()
+        session.input?.open()
+        session.output?.open()
     }
 
     private func stop() {
-        session?.input?.close()
-        session?.output?.close()
+        session.input?.close()
+        session.output?.close()
 
-        session?.input?.remove(from: .current, forMode: .commonModes)
-        session?.output?.remove(from: .current, forMode: .commonModes)
+        session.input?.remove(from: .current, forMode: .commonModes)
+        session.output?.remove(from: .current, forMode: .commonModes)
     }
 
     private func write(_ data: Data, maxLength length: Int, on session: EADispatchable?) -> Int? {
