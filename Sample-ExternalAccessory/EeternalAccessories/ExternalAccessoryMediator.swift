@@ -18,7 +18,10 @@ protocol EAMediatorDelegate {
 
 open class ExternalAccessoryMediator: NSObject {
 
-    let protocolString: ProtocolString
+    private let protocolString: ProtocolString
+    private let manager: EAManagable
+
+    private var delegate: EAMediatorDelegate?
 
     var state: AccessoryState
     var isActive: Bool {
@@ -62,10 +65,7 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
 
-
-    // MARK: - Private propetiesK
-
-    private let manager: EAManagable
+    // MARK: - Private propeties
 
     ///
     /// 接続中の外部接続先を返します  () -> [EAAccessory]
@@ -78,7 +78,6 @@ open class ExternalAccessoryMediator: NSObject {
         return accessory.isConnected
     }
 
-    private var delegate: EAMediatorDelegate?
 
     // MARK: - Private methods
 
