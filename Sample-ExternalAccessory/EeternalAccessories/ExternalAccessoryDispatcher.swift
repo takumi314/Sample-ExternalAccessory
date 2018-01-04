@@ -9,7 +9,7 @@
 import Foundation
 import ExternalAccessory
 
-protocol ExternalAccessoryDispatching {
+public protocol ExternalAccessoryDispatching {
     func connect()
     func close()
     func send(_ data: Data)
@@ -20,10 +20,10 @@ protocol EADispatcherDelegate {
 }
 
 
-public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching {
+open class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching {
 
-    let session: EADispatchable
-    let maxReadLength: Int
+    private let session: EADispatchable
+    private let maxReadLength: Int
 
     init(_ session: EADispatchable, maxLength maxReadLength: Int = MAX_READ_LENGTH, reciever delegate: EADispatcherDelegate?) {
         self.session        = session
@@ -48,13 +48,12 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
         return AccessoryInfo(accessory: accessory, protocolString: protocolString)
     }
 
-
-    var delegate: EADispatcherDelegate?
+    private var delegate: EADispatcherDelegate?
 
 
     // MARK: - Public methods
 
-    func connect() {
+    open func connect() {
         session.input?.delegate = self
         session.output?.delegate = self
 
@@ -64,11 +63,11 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
         start()
     }
 
-    func close() {
+    open func close() {
         stop()
     }
 
-    func send(_ data: Data) {
+    open func send(_ data: Data) {
         guard let code = write(data, maxLength: data.count, on: session) else {
             return
         }
@@ -122,7 +121,11 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
 
 }
 
+
+// MARK: - StreamDelegate
+
 extension ExternalAccessoryDispatcher: StreamDelegate {
+
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.hasBytesAvailable:
