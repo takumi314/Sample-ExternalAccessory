@@ -9,21 +9,19 @@
 import Foundation
 import ExternalAccessory
 
-let TEST_PROTOCOL_NAME = "test"
-let BUILD_PROTOCOL_NAME = ""
-let RELEASE_PROTOCOL_NAME = ""
-
-enum Result<T> {
-    case success(T)
-    case failure(NSError)
-}
-
 typealias ProtocolString = String
+typealias ActionDispatcher<T> = (ExternalAccessoryDispatcher) -> Result<T>
+
+protocol EAMediatorDelegate {
+    func receivedMessage<T>(message: T)
+}
 
 open class ExternalAccessoryMediator: NSObject {
 
-    let isAutomatic: Bool
-    let protocolString: ProtocolString
+    private let protocolString: ProtocolString
+    private let manager: EAManagable
+
+    private var delegate: EAMediatorDelegate?
 
     var state: AccessoryState
     var isActive: Bool {
@@ -34,59 +32,19 @@ open class ExternalAccessoryMediator: NSObject {
 
     // MARK: - Initializer
 
-    init(_ protocolString: ProtocolString = TEST_PROTOCOL_NAME, manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
-        self.protocolString   = protocolString
+    init(_ protocolString: ProtocolString = TEST_PROTOCOL_NAME, initial state: AccessoryState = EAInactive(), manager: EAManagable = EAAccessoryManager.shared(), reciever delegate: EAMediatorDelegate?) {
+        self.protocolString = protocolString
         self.manager        = manager
-        self.state          = EAInactive(manager: manager)
-        self.isAutomatic    = automatic
+        self.state          = state
+        self.delegate       = delegate
     }
+
+    convenience init(_ protocolString: ProtocolString, reciever delegate: EAMediatorDelegate) {
+        self.init(protocolString, manager: EAAccessoryManager.shared(), reciever: delegate)
+    }
+
 
     // MARK: - Public methods
-
-    func execute<T>(with data: T, handler: @escaping (Result<T>) -> Void) -> Void {
-        let state = connect(with: protocolString)
-        if state is EAInactive {
-            let error = NSError(domain: "No matching protocol", code: 100, userInfo: nil)
-            handler(.failure(error))
-            return
-        } else {
-            self.state = state
-        }
-        if isAutomatic {
-            handler(.success(data))
-        }
-    }
-
-    ///
-    /// プロトコルに適合する外部接続機器の接続状態オブジェクトを返す
-    ///
-    private func connect(with protocolString: ProtocolString) -> AccessoryState {
-        let conditional = { (name: String) -> Bool in
-            return name == protocolString
-        }
-        return connect(with: conditional)
-    }
-
-    ///
-    /// 条件設定: 指定したプロトコルが一致すること
-    ///
-    private func connect(with name: @escaping (String) -> Bool) -> AccessoryState {
-        let conditional = { (accessory: EAAccessing) -> Bool in
-            return accessory.accessible(with: name)
-        }
-        return connect(conditional: conditional)
-    }
-
-    ///
-    /// conditional: 一定の条件下で接続先が存在するならば EAActive を生成し, それ以外ならば EAInactive を生成する.
-    ///
-    private func connect(conditional: (EAAccessing) -> Bool) -> AccessoryState {
-        guard let accessory = connectedAccessories(manager).filter(conditional).first,
-            let session = EASession(accessory: accessory as! EAAccessory, forProtocol: TEST_PROTOCOL_NAME) else {
-            return EAInactive(manager: manager, accessory: nil)
-        }
-        return EAActive(manager: manager, accessory: accessory, session: session)
-    }
 
     func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {
         manager.showAccessoryPicker(withNameFilter: predicate) { error in
@@ -95,22 +53,77 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     func disconnect() -> Void {
-        self.state = state.disconnect(manager: manager, accessory: nil)
+        state = state.disconnect()
     }
 
-    // MARK: - Private propeties
+    func execute(handler: ActionHandler?) {
+        execute(protocolString: protocolString, manager: manager, handler: handler)
+    }
 
-    private let manager: EAManagable
+    func connect(with info: AccessoryInfo, completion: ActionHandler?) -> AccessoryState {
+        return connect(with: info, manager: manager, completion: completion)
+    }
+
+
+    // MARK: - Private propeties
 
     ///
     /// 接続中の外部接続先を返します  () -> [EAAccessory]
     ///
     private let connectedAccessories = { (manager: EAManagable) -> [EAAccessing] in
-        return manager.readConnectedAccessories()
+        return manager.readConnectedAccessories
     }
 
-    private var connectedaccessory: (EAAccessing) -> Bool = { accessory in
+    private var connectedAccessory: (EAAccessing) -> Bool = { accessory in
         return accessory.isConnected
+    }
+
+
+    // MARK: - Private methods
+
+    private func execute(protocolString: ProtocolString, manager: EAManagable = EAAccessoryManager.shared(), handler: ActionHandler?) {
+        if let info = ExternalAccessoryMediator.takeAccessoryInfo(with: protocolString, manager: manager) {
+            state = connect(with: info, manager: manager, completion: handler)
+        } else {
+            state = EAInactive()
+        }
+    }
+
+    private func connect(with info: AccessoryInfo, manager: EAManagable = EAAccessoryManager.shared(), completion: ActionHandler?) -> AccessoryState {
+        if let session = ExternalAccessoryMediator.lookSession(with: protocolString, manager: manager) {
+            let dispatcher = ExternalAccessoryDispatcher(session, maxLength: MAX_READ_LENGTH, reciever: self)
+            return state.connect(with: info, dispatcher: dispatcher, completion: completion)
+        } else {
+            return EAInactive()
+        }
+    }
+
+    private func dispatch(with protocolString: ProtocolString, manager: EAManagable = EAAccessoryManager.shared()) -> ExternalAccessoryDispatcher? {
+        guard let session = ExternalAccessoryMediator.lookSession(with: protocolString, manager: manager) else {
+            return nil
+        }
+        return ExternalAccessoryDispatcher(session, maxLength: MAX_READ_LENGTH, reciever: self)
+    }
+
+    private static func lookSession(with protocolString: ProtocolString, manager: EAManagable = EAAccessoryManager.shared()) -> EADispatchable? {
+        return ExternalAccessoryMediator.takeAccessoryInfo(with: protocolString, manager: manager)?.session
+    }
+
+    private static func takeAccessoryInfo(with protocolString: ProtocolString, manager: EAManagable = EAAccessoryManager.shared()) -> AccessoryInfo? {
+        guard let accessory = ExternalAccessoryMediator.takeConnectedAccessory(protocolString: protocolString, with: manager) else {
+            return nil
+        }
+        return AccessoryInfo(accessory: accessory, protocolString: protocolString)
+    }
+
+    ///
+    /// プロトコルを指定して, 接続中の外部接続端末の中で適合する EAAccessory を１つ取得する
+    ///
+    private static func takeConnectedAccessory(protocolString: ProtocolString, with manager: EAManagable = EAAccessoryManager.shared()) -> EAAccessing?  {
+        let isIncludedProtocol = { (accessory: EAAccessing) -> Bool in
+            return accessory.readProtocolStrings.contains(where: { $0 == protocolString })
+        }
+        return manager.readConnectedAccessories.filter(isIncludedProtocol).first
     }
 
 }
@@ -121,5 +134,9 @@ extension ExternalAccessoryMediator: EAAccessoryDelegate {
     }
 }
 
-
+extension ExternalAccessoryMediator: EADispatcherDelegate {
+    func receivedMessage<T>(message: T) {
+        delegate?.receivedMessage(message: message)
+    }
+}
 
