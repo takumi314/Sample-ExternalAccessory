@@ -11,64 +11,87 @@ import ExternalAccessory
 
 // MARK: - To manage accessory's statement
 
+typealias ActionHandler = (ExternalAccessoryDispatcher) -> AccessoryState
+
 protocol AccessoryState {
-    typealias ActionHandler = (EAAccessing) -> AccessoryState
-    func interact(handler: ActionHandler?) -> AccessoryState
-    func connect(accessory: EAAccessing, session: EADispatchable) -> AccessoryState
+    func interact(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler?) -> AccessoryState
+    func connect(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, completion: ActionHandler?) -> AccessoryState
     func disconnect() -> AccessoryState
-    func stop() -> AccessoryState?
+    func stop() -> AccessoryState
 }
 
 // MARK: - Eextenal accessory is active
 
 class EAActive: AccessoryState {
-    let accessory: EAAccessing
+    let info: AccessoryInfo
     let dispatcher: ExternalAccessoryDispatcher
+    let handler: ActionHandler?
 
-    init(accessory: EAAccessing, dispatcher: ExternalAccessoryDispatcher) {
-        self.accessory  = accessory
+    init(info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler? = nil) {
+        self.info       = info
         self.dispatcher = dispatcher
+        self.handler    = handler
     }
-    func interact(handler: ActionHandler?) -> AccessoryState {
-        if let handler = handler {
-            return handler(accessory)
+
+    func interact(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler?) -> AccessoryState {
+        guard let _ = info.connectedAccessory else {
+            return EAInactive().interact(with: info, dispatcher: dispatcher, handler: handler)
+        }
+        dispatcher.connect()
+        guard let handler = handler else {
+            return self
+        }
+        return handler(dispatcher)
+    }
+
+    func connect(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, completion: ActionHandler? = nil) -> AccessoryState {
+        guard let _ = info.connectedAccessory else {
+            return EAInactive().connect(with: info, dispatcher: dispatcher, completion: completion)
         }
         return self
     }
-    func connect(accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
+
+    func disconnect() -> AccessoryState {
+        print("Disconnected")
+        return EAInactive()
+    }
+
+    func stop() -> AccessoryState {
+        dispatcher.close()
+        print("Socket is close")
         return self
     }
-    func disconnect() -> AccessoryState {
-        return EAInactive(accessory: accessory)
-    }
-    func stop() -> AccessoryState? {
-        return nil
+
+    func interact() -> AccessoryState {
+        return interact(with: info, dispatcher: dispatcher, handler: handler)
     }
 }
 
 // MARK: - Eextenal accessory is inactive
 
 class EAInactive: AccessoryState {
-    let accessory: EAAccessing?
 
-    init(accessory: EAAccessing? = nil) {
-        self.accessory   = accessory
+    func interact(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler?) -> AccessoryState {
+        guard let _ = info.connectedAccessory else {
+            return connect(with: info, dispatcher: dispatcher, completion: handler)
+        }
+        guard let handler = handler else {
+            return connect(with: info, dispatcher: dispatcher)
+        }
+        return EAActive(info: info, dispatcher: dispatcher, handler: handler).interact()
     }
-    func interact(handler: ActionHandler?) -> AccessoryState {
-        guard let handler = handler, let accessory = accessory else {
-            assertionFailure("Error: camnot connect")
+
+    func connect(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, completion: ActionHandler? = nil) -> AccessoryState {
+        guard let _ = info.connectedAccessory else {
+            print("failed to connect")
             return self
         }
-        return handler(accessory)
-    }
-    func connect(accessory: EAAccessing, session: EADispatchable) -> AccessoryState {
-        return EAActive(accessory: accessory,
-                        dispatcher: ExternalAccessoryDispatcher(session, maxLength: MAX_READ_LENGTH))
+        return EAActive(info: info, dispatcher: dispatcher, handler: completion)
     }
     func disconnect() -> AccessoryState {
         return self
     }
-    func stop() -> AccessoryState? {
-        return nil
+    func stop() -> AccessoryState {
+        return self
     }
 }

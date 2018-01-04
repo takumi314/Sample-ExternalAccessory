@@ -15,12 +15,13 @@ protocol EADispatcherDelegate {
 
 public class ExternalAccessoryDispatcher: NSObject {
 
-    let session: EADispatchable
+    let session: EADispatchable?
     let maxReadLength: Int
 
-    init(_ session: EADispatchable, maxLength maxReadLength: Int = MAX_READ_LENGTH) {
+    init(_ session: EADispatchable?, maxLength maxReadLength: Int = MAX_READ_LENGTH, toDelegate delegate: EADispatcherDelegate?) {
         self.session        = session
         self.maxReadLength  = maxReadLength
+        self.delegate       = delegate
     }
 
     deinit {
@@ -30,7 +31,7 @@ public class ExternalAccessoryDispatcher: NSObject {
     // MARK: - Public properties
 
     var protocolString: String {
-        return session.protocolString ?? ""
+        return session?.protocolString ?? ""
     }
 
     var delegate: EADispatcherDelegate?
@@ -39,11 +40,11 @@ public class ExternalAccessoryDispatcher: NSObject {
     // MARK: - Public methods
 
     func connect() {
-        session.input?.delegate = self
-        session.output?.delegate = self
+        session?.input?.delegate = self
+        session?.output?.delegate = self
 
-        session.input?.schedule(in: .current, forMode: .commonModes)
-        session.output?.schedule(in: .current, forMode: .commonModes)
+        session?.input?.schedule(in: .current, forMode: .commonModes)
+        session?.output?.schedule(in: .current, forMode: .commonModes)
 
         start()
     }
@@ -58,7 +59,7 @@ public class ExternalAccessoryDispatcher: NSObject {
         }
         switch code {
         case (-1):
-            print(session.output?.streamError?.localizedDescription ?? "Error")
+            print(session?.output?.streamError?.localizedDescription ?? "Error")
             break
         case (0):
             print("Result 0: A fixed-length stream and has reached its capacity.")
@@ -71,36 +72,36 @@ public class ExternalAccessoryDispatcher: NSObject {
 
     // MARK: Private properies
 
-    private var accessory: EAAccessory {
-        return session.accessory!
+    private var accessory: EAAccessory? {
+        return session?.accessory
     }
 
-    private var input: InputStream {
-        return session.input!
+    private var input: InputStream? {
+        return session?.input
     }
 
-    private var output: OutputStream {
-        return session.output!
+    private var output: OutputStream? {
+        return session?.output
     }
 
     // MARK: - Private methods
 
     private func start() {
-        session.input?.open()
-        session.output?.open()
+        session?.input?.open()
+        session?.output?.open()
     }
 
     private func stop() {
-        session.input?.close()
-        session.output?.close()
+        session?.input?.close()
+        session?.output?.close()
 
-        session.input?.remove(from: .current, forMode: .commonModes)
-        session.output?.remove(from: .current, forMode: .commonModes)
+        session?.input?.remove(from: .current, forMode: .commonModes)
+        session?.output?.remove(from: .current, forMode: .commonModes)
     }
 
-    private func write(_ data: Data, maxLength length: Int, on session: EADispatchable) -> Int? {
+    private func write(_ data: Data, maxLength length: Int, on session: EADispatchable?) -> Int? {
         return data.withUnsafeBytes {
-            return session.output?.write($0, maxLength: length)
+            return session?.output?.write($0, maxLength: length)
         }
     }
 

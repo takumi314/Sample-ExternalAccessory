@@ -22,10 +22,14 @@ enum Result<T> {
 }
 
 typealias ProtocolString = String
+typealias ActionDispatcher<T> = (ExternalAccessoryDispatcher) -> Result<T>
+
+protocol EAMediatorDelegate {
+    func receivedMessage<T>(message: T)
+}
 
 open class ExternalAccessoryMediator: NSObject {
 
-    let isAutomatic: Bool
     let protocolString: ProtocolString
 
     var state: AccessoryState
@@ -37,30 +41,44 @@ open class ExternalAccessoryMediator: NSObject {
 
     // MARK: - Initializer
 
-    init(_ protocolString: ProtocolString = TEST_PROTOCOL_NAME, manager: EAManagable = EAAccessoryManager.shared(), automatic: Bool = false) {
-        self.protocolString   = protocolString
+    init(_ protocolString: ProtocolString = TEST_PROTOCOL_NAME, initial state: AccessoryState = EAInactive(), manager: EAManagable = EAAccessoryManager.shared(), reciever delegate: EAMediatorDelegate) {
+        self.protocolString = protocolString
         self.manager        = manager
-        self.state          = EAInactive(accessory: nil)
-        self.isAutomatic    = automatic
+        self.state          = state
+        self.delegate       = delegate
     }
 
-    convenience init(_ protocolString: ProtocolString, automatic: Bool) {
-        self.init(protocolString, manager: EAAccessoryManager.shared(), automatic: automatic)
+    convenience init(_ protocolString: ProtocolString, reciever delegate: EAMediatorDelegate) {
+        self.init(protocolString, manager: EAAccessoryManager.shared(), reciever: delegate)
     }
 
     // MARK: - Public methods
 
     func execute<T>(with data: T, handler: @escaping (Result<T>) -> Void) -> Void {
-        let state = connect(with: protocolString)
+        state = connect(with: protocolString)
         if state is EAInactive {
             let error = NSError(domain: "No matching protocol", code: 100, userInfo: nil)
             handler(.failure(error))
             return
         } else {
-            self.state = state
+            //
         }
-        if isAutomatic {
-            handler(.success(data))
+    }
+
+    func execute(handler: ActionHandler?) {
+        if let info = ExternalAccessoryMediator.takeAccessoryInfo(with: protocolString, manager: manager) {
+            state = connect(with: info, completion: handler)
+        } else {
+            state = EAInactive()
+        }
+    }
+
+    func connect(with info: AccessoryInfo, completion: ActionHandler?) -> AccessoryState {
+        if let session = ExternalAccessoryMediator.listen(with: protocolString, manager: manager) {
+            let dispatcher = ExternalAccessoryDispatcher(session, maxLength: MAX_READ_LENGTH, toDelegate: self)
+            return state.connect(with: info, dispatcher: dispatcher, completion: completion)
+        } else {
+            return EAInactive()
         }
     }
 
@@ -72,6 +90,31 @@ open class ExternalAccessoryMediator: NSObject {
             return name == protocolString
         }
         return connect(with: conditional)
+    }
+
+    private func dispach(with protocolString: ProtocolString, manager: EAManagable = EAAccessoryManager.shared()) -> ExternalAccessoryDispatcher? {
+        guard let session = ExternalAccessoryMediator.listen(with: protocolString, manager: manager) else {
+            return nil
+        }
+        return ExternalAccessoryDispatcher(session, maxLength: MAX_READ_LENGTH, toDelegate: self)
+    }
+
+    private static func listen(with protocolString: ProtocolString, manager: EAManagable = EAAccessoryManager.shared()) -> EADispatchable? {
+        return ExternalAccessoryMediator.takeAccessoryInfo(with: protocolString, manager: manager)?.session
+    }
+
+    static func takeAccessoryInfo(with protocolString: ProtocolString, manager: EAManagable = EAAccessoryManager.shared()) -> AccessoryInfo? {
+        guard let accessory = ExternalAccessoryMediator.takeConnectedAccessory(protocolString: protocolString, with: manager)  else {
+            return nil
+        }
+        return AccessoryInfo(accessory: accessory, protocolString: protocolString)
+    }
+
+    static func takeConnectedAccessory(protocolString: ProtocolString, with manager: EAManagable = EAAccessoryManager.shared()) -> EAAccessing?  {
+        let isIncludedProtocol = { (accessory: EAAccessing) -> Bool in
+            return accessory.readProtocolStrings.contains(where: { $0 == protocolString })
+        }
+        return manager.readConnectedAccessories.filter(isIncludedProtocol).first
     }
 
     ///
@@ -89,12 +132,11 @@ open class ExternalAccessoryMediator: NSObject {
     ///
     private func connect(with protocolString: ProtocolString, conditional: (EAAccessing) -> Bool) -> AccessoryState {
         guard let accessory = connectedAccessories(manager).filter(conditional).first else {
-            return EAInactive(accessory: nil)
+            return EAInactive()
         }
-        let session = EASession(accessory: accessory as! EAAccessory, forProtocol: protocolString)
-        let dispatcher = ExternalAccessoryDispatcher(session!, maxLength: MAX_READ_LENGTH)
-        dispatcher.delegate = self
-        return EAActive(accessory: accessory, dispatcher: dispatcher)
+        let info = AccessoryInfo(accessory: accessory, protocolString: protocolString)
+        let dispatcher = ExternalAccessoryDispatcher(info.session, maxLength: MAX_READ_LENGTH, toDelegate: self)
+        return state.connect(with: info, dispatcher: dispatcher, completion: nil)
     }
 
     func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {
@@ -104,7 +146,7 @@ open class ExternalAccessoryMediator: NSObject {
     }
 
     func disconnect() -> Void {
-        self.state = state.disconnect()
+        state = state.disconnect()
     }
 
     // MARK: - Private propeties
@@ -118,10 +160,11 @@ open class ExternalAccessoryMediator: NSObject {
         return manager.readConnectedAccessories
     }
 
-    private var connectedaccessory: (EAAccessing) -> Bool = { accessory in
+    private var connectedAccessory: (EAAccessing) -> Bool = { accessory in
         return accessory.isConnected
     }
 
+    private var delegate: EAMediatorDelegate?
 }
 
 extension ExternalAccessoryMediator: EAAccessoryDelegate {
