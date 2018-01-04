@@ -34,74 +34,102 @@ class Sample_ExternalAccessaryTests: XCTestCase {
         }
     }
 
+    class EAAccessoryMock: EAAccessing {
+        var name: String {
+            get {
+                return "Test"
+            }
+        }
+        var isConnected: Bool {
+            get {
+                return true
+            }
+        }
+        var readProtocolStrings: [String] {
+            get {
+                return ["test"]
+            }
+        }
+        func accessible(with protocolString: @escaping (String) -> Bool) -> Bool {
+            return readProtocolStrings.contains(where: protocolString)
+        }
+    }
+    class EAAccessoryManagerMock: EAManagable {
+        var readConnectedAccessories: [EAAccessing] {
+            get {
+                let object = EAAccessoryMock()
+                return [object]
+            }
+        }
+    }
+    class DispatchMock: ExternalAccessoryDispatching {
+        func connect() {
+            print("connect")
+        }
+        func close() {
+            print("close")
+        }
+        func send(_ data: Data) {
+            print("data: \(data)")
+        }
+    }
+    class SessionMock: EADispatchable {
+        var input: InputStream?
+        var output: OutputStream?
+        var accessory: EAAccessing? {
+            return EAAccessoryMock()
+        }
+        var protocolString: ProtocolString? {
+            return TEST_PROTOCOL_NAME
+        }
+    }
+    struct AccessoryInfoMock: AccessoryInforming {
+        var connectedAccessory: EAAccessing? {
+            return EAAccessoryMock()
+        }
+        var session: EADispatchable? {
+            return SessionMock()
+        }
+    }
+
+    func testAccessryState() {
+        var state: AccessoryState = EAInactive()
+        let info = AccessoryInfoMock()
+        let dispatcher = DispatchMock()
+
+        state = state.connect(with: info, dispatcher: dispatcher, completion: nil)
+        XCTAssertTrue(state is EAActive)
+
+        state = state.disconnect()
+        XCTAssertTrue(state is EAInactive)
+
+        state = state.interact(with: info, dispatcher: dispatcher) { (dispatcher) in
+            let data = "test".data(using: .utf8)!
+            dispatcher.send(data)
+        }
+        XCTAssertTrue(state is EAActive)
+
+        state = state.disconnect().connect(with: info, dispatcher: dispatcher) { (dispatcher) in
+            dispatcher.connect()
+            let data = "test".data(using: .utf8)!
+            dispatcher.send(data)
+            dispatcher.close()
+        }
+        XCTAssertTrue(state is EAActive)
+
+        state = state.stop()
+        XCTAssertTrue(state is EAActive)
+
+        state = state.disconnect().stop().interact(with: info, dispatcher: dispatcher) { (dispatcher) in
+            dispatcher.connect()
+        }.disconnect()
+        XCTAssertTrue(state is EAInactive)
+    }
+
     func testInactiveaccessory() -> Void {
-        let manager = EAAccessoryManager.shared()
-        let mediator = ExternalAccessoryMediator("test", manager: manager, automatic: false)
-
-        XCTAssertTrue(mediator.protocolName == "test")
-
-        mediator.execute(with: "", handler: { _ in })
-
-        XCTAssertTrue(mediator.state is EAInactive)
-        XCTAssertTrue(mediator.isActive == false)
-        XCTAssertTrue(mediator.isAutomatic == false)
     }
 
     func testActiveaccessory() -> Void {
-        class EAAccessoryMock: EAAccessing {
-            var isConnected: Bool {
-                get {
-                    return true
-                }
-            }
-            var readProtocolStrings: [String] {
-                get {
-                    return ["test"]
-                }
-
-            }
-            func accessible(with protocolName: @escaping (String) -> Bool) -> Bool {
-                return readProtocolStrings.contains(where: protocolName)
-            }
-        }
-        class EAAccessoryManagerMock: EAManagable {
-            var readConnectedAccessories: [EAAccessing] {
-                get {
-                    let object = EAAccessoryMock()
-                    return [object]
-                }
-            }
-        }
-
-
-        let mock = EAAccessoryManagerMock()
-        let mediator = ExternalAccessoryMediator("test", manager: mock, automatic: true)
-
-        XCTAssertTrue(mediator.protocolName == "test")
-
-        mediator.execute(with: "", handler: { _ in  })
-
-        XCTAssertTrue(mediator.state is EAActive)
-        XCTAssertTrue(mediator.isActive == true)
-        XCTAssertTrue(mediator.isAutomatic == true)
-
-        mediator.disconnect()
-        XCTAssertTrue(mediator.state is EAInactive)
-
-        var data: String = ""
-        mediator.execute(with: "test_data", handler: { (result) in
-            switch result {
-            case .success(let string):
-                print(string)
-                data = string
-                break
-            default:
-                break
-            }
-        })
-
-        XCTAssertTrue(mediator.state is EAActive)
-        XCTAssertTrue(data == "test_data")
     }
 
 }

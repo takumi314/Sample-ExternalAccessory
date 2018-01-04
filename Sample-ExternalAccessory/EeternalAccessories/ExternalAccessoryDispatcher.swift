@@ -9,56 +9,52 @@
 import Foundation
 import ExternalAccessory
 
-protocol EADispatchable {
-    var input: InputStream? { get }
-    var output: OutputStream? { get }
-    var accessory: EAAccessory? { get }
-    var protocolName: ProtocolName? { get }
-}
-
-extension EASession: EADispatchable {
-    var input: InputStream? {
-        return self.inputStream
-    }
-    var output: OutputStream? {
-        return self.outputStream
-    }
-    var accessory: EAAccessory? {
-        return self.accessory
-    }
-    var protocolName: ProtocolName? {
-        return self.protocolString
-    }
+protocol ExternalAccessoryDispatching {
+    func connect()
+    func close()
+    func send(_ data: Data)
 }
 
 protocol EADispatcherDelegate {
     func receivedMessage<T>(message: T)
 }
 
-public class ExternalAccessoryDispatcher: NSObject {
+
+public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching {
 
     let session: EADispatchable
-    let state: AccessoryState
     let maxReadLength: Int
 
-    init(_ session: EADispatchable, state: AccessoryState, maxLength maxReadLength: Int = 4096) {
+    init(_ session: EADispatchable, maxLength maxReadLength: Int = MAX_READ_LENGTH, reciever delegate: EADispatcherDelegate?) {
         self.session        = session
-        self.state          = state
         self.maxReadLength  = maxReadLength
+        self.delegate       = delegate
+    }
+
+    deinit {
+        stop()
     }
 
     // MARK: - Public properties
 
     var protocolString: String {
-        return session.protocolName ?? ""
+        return session.protocolString ?? ""
     }
+
+    var info: AccessoryInfo? {
+        guard let accessory = session.accessory else {
+            return nil
+        }
+        return AccessoryInfo(accessory: accessory, protocolString: protocolString)
+    }
+
 
     var delegate: EADispatcherDelegate?
 
 
     // MARK: - Public methods
 
-    func setupNetworkCommunication() {
+    func connect() {
         session.input?.delegate = self
         session.output?.delegate = self
 
@@ -68,11 +64,12 @@ public class ExternalAccessoryDispatcher: NSObject {
         start()
     }
 
+    func close() {
+        stop()
+    }
+
     func send(_ data: Data) {
-        let result = data.withUnsafeBytes {
-            return session.output?.write($0, maxLength: data.count)
-        }
-        guard let code = result else {
+        guard let code = write(data, maxLength: data.count, on: session) else {
             return
         }
         switch code {
@@ -90,16 +87,16 @@ public class ExternalAccessoryDispatcher: NSObject {
 
     // MARK: Private properies
 
-    private var accessory: EAAccessory {
-        return session.accessory!
+    private var accessory: EAAccessing? {
+        return session.accessory
     }
 
-    private var input: InputStream {
-        return session.input!
+    private var input: InputStream? {
+        return session.input
     }
 
-    private var output: OutputStream {
-        return session.output!
+    private var output: OutputStream? {
+        return session.output
     }
 
     // MARK: - Private methods
@@ -112,6 +109,15 @@ public class ExternalAccessoryDispatcher: NSObject {
     private func stop() {
         session.input?.close()
         session.output?.close()
+
+        session.input?.remove(from: .current, forMode: .commonModes)
+        session.output?.remove(from: .current, forMode: .commonModes)
+    }
+
+    private func write(_ data: Data, maxLength length: Int, on session: EADispatchable?) -> Int? {
+        return data.withUnsafeBytes {
+            return session?.output?.write($0, maxLength: length)
+        }
     }
 
 }

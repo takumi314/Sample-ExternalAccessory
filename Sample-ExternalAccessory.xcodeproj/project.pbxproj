@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E115E09D1FFA0F5400B6BDE3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E115E09C1FFA0F5400B6BDE3 /* Info.plist */; };
+		E115E0A01FFA211A00B6BDE3 /* EADispatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115E09F1FFA211A00B6BDE3 /* EADispatchable.swift */; };
+		E115E0A21FFD457000B6BDE3 /* AccessoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115E0A11FFD457000B6BDE3 /* AccessoryInfo.swift */; };
+		E115E0A41FFE980F00B6BDE3 /* EACommons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115E0A31FFE980F00B6BDE3 /* EACommons.swift */; };
 		E1D707151FEE9CED00292B7B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */; };
 		E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */; };
 		E1D7071A1FF1790600292B7B /* EAAccessoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */; };
@@ -33,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E115E09C1FFA0F5400B6BDE3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E115E09F1FFA211A00B6BDE3 /* EADispatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EADispatchable.swift; sourceTree = "<group>"; };
+		E115E0A11FFD457000B6BDE3 /* AccessoryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryInfo.swift; sourceTree = "<group>"; };
+		E115E0A31FFE980F00B6BDE3 /* EACommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EACommons.swift; sourceTree = "<group>"; };
 		E1D707141FEE9CED00292B7B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalAccessoryMediator.swift; sourceTree = "<group>"; };
 		E1D707191FF1790600292B7B /* EAAccessoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EAAccessoryExtension.swift; sourceTree = "<group>"; };
@@ -49,7 +57,6 @@
 		E1DB3D641FEE6DA0009B0648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1DB3D691FEE6DA0009B0648 /* Sample-ExternalAccessoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sample-ExternalAccessoryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample_ExternalAccessoryTests.swift; sourceTree = "<group>"; };
-		E1DB3D6F1FEE6DA0009B0648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +102,9 @@
 				E1D707161FEEAF4500292B7B /* ExternalAccessoryMediator.swift */,
 				E1D7071C1FF2958200292B7B /* AccessoryState.swift */,
 				E1D707241FF6299900292B7B /* ExternalAccessoryDispatcher.swift */,
+				E115E09F1FFA211A00B6BDE3 /* EADispatchable.swift */,
+				E115E0A11FFD457000B6BDE3 /* AccessoryInfo.swift */,
+				E115E0A31FFE980F00B6BDE3 /* EACommons.swift */,
 			);
 			path = EeternalAccessories;
 			sourceTree = "<group>";
@@ -136,8 +146,8 @@
 		E1DB3D6C1FEE6DA0009B0648 /* Sample-ExternalAccessoryTests */ = {
 			isa = PBXGroup;
 			children = (
+				E115E09C1FFA0F5400B6BDE3 /* Info.plist */,
 				E1DB3D6D1FEE6DA0009B0648 /* Sample_ExternalAccessoryTests.swift */,
-				E1DB3D6F1FEE6DA0009B0648 /* Info.plist */,
 			);
 			path = "Sample-ExternalAccessoryTests";
 			sourceTree = "<group>";
@@ -235,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E115E09D1FFA0F5400B6BDE3 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,8 +256,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E115E0A01FFA211A00B6BDE3 /* EADispatchable.swift in Sources */,
 				E1DB3D5B1FEE6DA0009B0648 /* ViewController.swift in Sources */,
+				E115E0A21FFD457000B6BDE3 /* AccessoryInfo.swift in Sources */,
 				E1D7071D1FF2958300292B7B /* AccessoryState.swift in Sources */,
+				E115E0A41FFE980F00B6BDE3 /* EACommons.swift in Sources */,
 				E1D7071F1FF2CD6F00292B7B /* EAAccessoryManagerExtension.swift in Sources */,
 				E1D707171FEEAF4500292B7B /* ExternalAccessoryMediator.swift in Sources */,
 				E1D707231FF4189A00292B7B /* EASessionExtension.swift in Sources */,
@@ -440,7 +454,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
-				INFOPLIST_FILE = "Sample-ExternalAccessaryTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessoryTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessaryTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -457,7 +471,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9D8UR7H9D4;
-				INFOPLIST_FILE = "Sample-ExternalAccessaryTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample-ExternalAccessoryTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.takumi314.Sample-ExternalAccessaryTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
