@@ -12,7 +12,7 @@ import ExternalAccessory
 protocol EADispatchable {
     var input: InputStream? { get }
     var output: OutputStream? { get }
-    var accessory: EAAccessory? { get }
+    var accessory: EAAccessing? { get }
     var protocolString: ProtocolString? { get }
 }
 
@@ -23,7 +23,7 @@ extension EASession: EADispatchable {
     var output: OutputStream? {
         return self.outputStream
     }
-    var accessory: EAAccessory? {
+    var accessory: EAAccessing? {
         return self.accessory
     }
     var protocolString: ProtocolString? {

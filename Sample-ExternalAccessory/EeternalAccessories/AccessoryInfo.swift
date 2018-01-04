@@ -9,7 +9,12 @@
 import Foundation
 import ExternalAccessory
 
-struct AccessoryInfo {
+protocol AccessoryInforming {
+    var connectedAccessory: EAAccessing? { get }
+    var session: EADispatchable? { get }
+}
+
+struct AccessoryInfo: AccessoryInforming {
     private let accessory: EAAccessing
     private let protocolString: ProtocolString
 

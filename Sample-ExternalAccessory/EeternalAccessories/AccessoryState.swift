@@ -11,11 +11,11 @@ import ExternalAccessory
 
 // MARK: - To manage accessory's statement
 
-typealias ActionHandler = (ExternalAccessoryDispatcher) -> AccessoryState
+typealias ActionHandler = (ExternalAccessoryDispatching) -> Void
 
 protocol AccessoryState {
-    func interact(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler?) -> AccessoryState
-    func connect(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, completion: ActionHandler?) -> AccessoryState
+    func interact(with info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, handler: ActionHandler?) -> AccessoryState
+    func connect(with info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, completion: ActionHandler?) -> AccessoryState
     func disconnect() -> AccessoryState
     func stop() -> AccessoryState
 }
@@ -23,17 +23,17 @@ protocol AccessoryState {
 // MARK: - Eextenal accessory is active
 
 class EAActive: AccessoryState {
-    let info: AccessoryInfo
-    let dispatcher: ExternalAccessoryDispatcher
+    let info: AccessoryInforming
+    let dispatcher: ExternalAccessoryDispatching
     let handler: ActionHandler?
 
-    init(info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler? = nil) {
+    init(info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, handler: ActionHandler? = nil) {
         self.info       = info
         self.dispatcher = dispatcher
         self.handler    = handler
     }
 
-    func interact(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler?) -> AccessoryState {
+    func interact(with info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, handler: ActionHandler?) -> AccessoryState {
         guard let _ = info.connectedAccessory else {
             return EAInactive().interact(with: info, dispatcher: dispatcher, handler: handler)
         }
@@ -44,7 +44,7 @@ class EAActive: AccessoryState {
         return handler(dispatcher)
     }
 
-    func connect(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, completion: ActionHandler? = nil) -> AccessoryState {
+    func connect(with info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, completion: ActionHandler? = nil) -> AccessoryState {
         guard let _ = info.connectedAccessory else {
             return EAInactive().connect(with: info, dispatcher: dispatcher, completion: completion)
         }
@@ -71,7 +71,7 @@ class EAActive: AccessoryState {
 
 class EAInactive: AccessoryState {
 
-    func interact(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, handler: ActionHandler?) -> AccessoryState {
+    func interact(with info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, handler: ActionHandler?) -> AccessoryState {
         guard let _ = info.connectedAccessory else {
             return connect(with: info, dispatcher: dispatcher, completion: handler)
         }
@@ -81,7 +81,7 @@ class EAInactive: AccessoryState {
         return EAActive(info: info, dispatcher: dispatcher, handler: handler).interact()
     }
 
-    func connect(with info: AccessoryInfo, dispatcher: ExternalAccessoryDispatcher, completion: ActionHandler? = nil) -> AccessoryState {
+    func connect(with info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, completion: ActionHandler? = nil) -> AccessoryState {
         guard let _ = info.connectedAccessory else {
             print("failed to connect")
             return self
