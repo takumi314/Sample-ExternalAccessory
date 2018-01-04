@@ -42,7 +42,7 @@ public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching
     }
 
     var info: AccessoryInfo? {
-        guard let accessory = accessory else {
+        guard let accessory = session.accessory else {
             return nil
         }
         return AccessoryInfo(accessory: accessory, protocolString: protocolString)
