@@ -46,7 +46,7 @@ struct AccessoryInfo: AccessoryInforming {
 
     var isValid: Bool {
         get {
-            return accessory.accessible(with: { $0 == self.protocolString })
+            return session?.accessory?.accessible(with: { $0 == self.protocolString }) ?? false
         }
     }
 
