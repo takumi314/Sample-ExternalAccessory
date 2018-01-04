@@ -41,12 +41,16 @@ class EAActive: AccessoryState {
         guard let handler = handler else {
             return self
         }
-        return handler(dispatcher)
+        handler(dispatcher)
+        return self
     }
 
     func connect(with info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, completion: ActionHandler? = nil) -> AccessoryState {
         guard let _ = info.connectedAccessory else {
             return EAInactive().connect(with: info, dispatcher: dispatcher, completion: completion)
+        }
+        if let completion = completion {
+            completion(dispatcher)
         }
         return self
     }
@@ -64,6 +68,13 @@ class EAActive: AccessoryState {
 
     func interact() -> AccessoryState {
         return interact(with: info, dispatcher: dispatcher, handler: handler)
+    }
+
+    func execute() -> AccessoryState {
+        if let handler = handler {
+            handler(dispatcher)
+        }
+        return self
     }
 }
 
@@ -86,7 +97,7 @@ class EAInactive: AccessoryState {
             print("failed to connect")
             return self
         }
-        return EAActive(info: info, dispatcher: dispatcher, handler: completion)
+        return EAActive(info: info, dispatcher: dispatcher, handler: completion).execute()
     }
     func disconnect() -> AccessoryState {
         return self
