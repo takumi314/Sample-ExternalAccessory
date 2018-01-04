@@ -26,7 +26,6 @@ extension EAAccessory: EAAccessing {
         }
     }
 
-
     var isConnected: Bool {
         get {
             return self.isConnected

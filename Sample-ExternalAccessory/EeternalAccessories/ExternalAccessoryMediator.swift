@@ -52,6 +52,7 @@ open class ExternalAccessoryMediator: NSObject {
         self.init(protocolString, manager: EAAccessoryManager.shared(), reciever: delegate)
     }
 
+
     // MARK: - Public methods
 
     func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {

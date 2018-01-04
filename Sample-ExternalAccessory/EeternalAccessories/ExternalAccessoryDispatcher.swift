@@ -19,6 +19,7 @@ protocol EADispatcherDelegate {
     func receivedMessage<T>(message: T)
 }
 
+
 public class ExternalAccessoryDispatcher: NSObject, ExternalAccessoryDispatching {
 
     let session: EADispatchable

@@ -25,6 +25,4 @@ extension EAManagable {
     }
 }
 
-extension EAAccessoryManager: EAManagable {
-    
-}
+extension EAAccessoryManager: EAManagable { }
