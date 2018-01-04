@@ -9,18 +9,6 @@
 import Foundation
 import ExternalAccessory
 
-let TEST_PROTOCOL_NAME = "test"
-let BUILD_PROTOCOL_NAME = ""
-let RELEASE_PROTOCOL_NAME = ""
-
-let MAX_READ_LENGTH = 4096
-
-
-enum Result<T> {
-    case success(T)
-    case failure(NSError)
-}
-
 typealias ProtocolString = String
 typealias ActionDispatcher<T> = (ExternalAccessoryDispatcher) -> Result<T>
 
