@@ -23,9 +23,9 @@ protocol AccessoryState {
 // MARK: - Eextenal accessory is active
 
 class EAActive: AccessoryState {
-    let info: AccessoryInforming
-    let dispatcher: ExternalAccessoryDispatching
-    let handler: ActionHandler?
+    private let info: AccessoryInforming
+    private let dispatcher: ExternalAccessoryDispatching
+    private let handler: ActionHandler?
 
     init(info: AccessoryInforming, dispatcher: ExternalAccessoryDispatching, handler: ActionHandler? = nil) {
         self.info       = info
@@ -99,10 +99,13 @@ class EAInactive: AccessoryState {
         }
         return EAActive(info: info, dispatcher: dispatcher, handler: completion).execute()
     }
+
     func disconnect() -> AccessoryState {
         return self
     }
+
     func stop() -> AccessoryState {
         return self
     }
+
 }
