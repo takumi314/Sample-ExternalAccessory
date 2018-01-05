@@ -46,7 +46,7 @@ open class ExternalAccessoryMediator: NSObject {
 
     // MARK: - Public methods
 
-    open func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable) -> Void {
+    open func showBluetoothAccessories(with predicate: NSPredicate?, _ manager: EAManagable = EAAccessoryManager.shared()) -> Void {
         manager.showAccessoryPicker(withNameFilter: predicate) { error in
             print("Error: \(error.debugDescription)")
         }
@@ -60,7 +60,7 @@ open class ExternalAccessoryMediator: NSObject {
         execute(protocolString: protocolString, manager: manager, handler: handler)
     }
 
-    func connect(with info: AccessoryInfo, completion: ActionHandler?) -> AccessoryState {
+    private func connect(with info: AccessoryInfo, completion: ActionHandler?) -> AccessoryState {
         return connect(with: info, manager: manager, completion: completion)
     }
 
